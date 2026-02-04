@@ -65,7 +65,7 @@ export default function TransportAddReccurent({ currentTransport }) {
           await new Promise((resolve) => setTimeout(resolve, 500));
           reset();
           toast.success(currentTransport ? 'Mise à jour réussie !' : 'Créez le succès !');
-          router.push(paths.dashboard.evp.notes.root);
+          router.push(paths.salaries.transport.root);
           console.info('DATA', data);
         } catch (error) {
           console.error(error);

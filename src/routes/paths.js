@@ -11,6 +11,7 @@ const ROOTS = {
 
 export const paths = {
   faqs: '/faqs',
+  hub: '/connexion-hub',
   minimalStore: 'https://mui.com/store/items/minimal-dashboard/',
   // AUTH
   auth: {
@@ -24,6 +25,7 @@ export const paths = {
     jwt: {
       signIn: `${ROOTS.AUTH}/jwt/sign-in`,
       signUp: `${ROOTS.AUTH}/jwt/sign-up`,
+      forgetPassword: `${ROOTS.AUTH}/jwt/forget-pass-word`,
     },
     firebase: {
       signIn: `${ROOTS.AUTH}/firebase/sign-in`,
@@ -45,7 +47,7 @@ export const paths = {
   // DASHBOARD
   dashboard: {
     root: ROOTS.DASHBOARD,
-    
+
     employes: {
       root: `${ROOTS.DASHBOARD}/salaries`,
       view: (id) => `${ROOTS.DASHBOARD}/salaries/${id}/view`,
@@ -59,13 +61,13 @@ export const paths = {
       root: `${ROOTS.DASHBOARD}/equipes`,
       org: `${ROOTS.DASHBOARD}/equipes/organigramme`,
       tromb: `${ROOTS.DASHBOARD}/equipes/trombinoscope`,
-      view: (id) => `${ROOTS.DASHBOARD}/equipes/${id}/view`
+      view: (id) => `${ROOTS.DASHBOARD}/equipes/${id}/view`,
     },
     entreprise: {
       root: `${ROOTS.DASHBOARD}/vos-entreprises`,
       addEntreprise: `${ROOTS.DASHBOARD}/vos-entreprises/add`,
-      edit: (id)=>`${ROOTS.DASHBOARD}/vos-entreprises/${id}/edit`,
-      view: (id)=>`${ROOTS.DASHBOARD}/vos-entreprises/${id}/view`,
+      edit: (id) => `${ROOTS.DASHBOARD}/vos-entreprises/${id}/edit`,
+      view: (id) => `${ROOTS.DASHBOARD}/vos-entreprises/${id}/view`,
       successAddEntreprise: `${ROOTS.DASHBOARD}/vos-entreprises/add/success`,
     },
     gestionRh: {
@@ -75,9 +77,9 @@ export const paths = {
       entretien: {
         root: `${ROOTS.DASHBOARD}/gestion-rh/entretien`,
         add: `${ROOTS.DASHBOARD}/gestion-rh/entretien/add`,
-        edit: (id)=>`${ROOTS.DASHBOARD}/gestion-rh/entretien/${id}/edit`,
-        view: (id)=>`${ROOTS.DASHBOARD}/gestion-rh/entretien/${id}`,
-        types: (id)=>`${ROOTS.DASHBOARD}/gestion-rh/entretien/${id}/types`,
+        edit: (id) => `${ROOTS.DASHBOARD}/gestion-rh/entretien/${id}/edit`,
+        view: (id) => `${ROOTS.DASHBOARD}/gestion-rh/entretien/${id}`,
+        types: (id) => `${ROOTS.DASHBOARD}/gestion-rh/entretien/${id}/types`,
       },
       template: `${ROOTS.DASHBOARD}/gestion-rh/templates`,
     },
@@ -88,46 +90,46 @@ export const paths = {
     evp: {
       primes: {
         root: `${ROOTS.DASHBOARD}/evp/primes`,
-        settings: `${ROOTS.DASHBOARD}/evp/primes/settings`
+        settings: `${ROOTS.DASHBOARD}/evp/primes/settings`,
       },
       notes: {
         root: `${ROOTS.DASHBOARD}/evp/notes`,
-        add : `${ROOTS.DASHBOARD}/evp/notes/add`,
-        edit : (id) => `${ROOTS.DASHBOARD}/evp/notes/${id}/edit`,
-        view : (id) => `${ROOTS.DASHBOARD}/evp/notes/${id}`,
+        add: `${ROOTS.DASHBOARD}/evp/notes/add`,
+        edit: (id) => `${ROOTS.DASHBOARD}/evp/notes/${id}/edit`,
+        view: (id) => `${ROOTS.DASHBOARD}/evp/notes/${id}`,
       },
       transport: {
         root: `${ROOTS.DASHBOARD}/evp/transport`,
-        addCurrent : `${ROOTS.DASHBOARD}/evp/transport/new-recurrent`,
-        addPonctuel : `${ROOTS.DASHBOARD}/evp/transport/new-ponctuel`,
-        parametres : `${ROOTS.DASHBOARD}/evp/transport/parametres`,
+        addCurrent: `${ROOTS.DASHBOARD}/evp/transport/new-recurrent`,
+        addPonctuel: `${ROOTS.DASHBOARD}/evp/transport/new-ponctuel`,
+        parametres: `${ROOTS.DASHBOARD}/evp/transport/parametres`,
       },
       cloture: {
-        root: `${ROOTS.DASHBOARD}/evp/cloture`
-      }
+        root: `${ROOTS.DASHBOARD}/evp/cloture`,
+      },
     },
-    comptabilite : {
+    comptabilite: {
       root: `${ROOTS.DASHBOARD}/comptabilite`,
       documents: {
         root: `${ROOTS.DASHBOARD}/comptabilite/documents`,
-      }
+      },
     },
-    parametres : {
+    parametres: {
       root: `${ROOTS.DASHBOARD}/parametres`,
       admins: {
-        root: `${ROOTS.DASHBOARD}/parametres/admins`
+        root: `${ROOTS.DASHBOARD}/parametres/admins`,
       },
       banks: {
-        root: `${ROOTS.DASHBOARD}/parametres/banks`
+        root: `${ROOTS.DASHBOARD}/parametres/banks`,
       },
       cabinets: {
-        root: `${ROOTS.DASHBOARD}/parametres/cabinets`
+        root: `${ROOTS.DASHBOARD}/parametres/cabinets`,
       },
       entreprises: {
-        root: `${ROOTS.DASHBOARD}/parametres/entreprises`
+        root: `${ROOTS.DASHBOARD}/parametres/entreprises`,
       },
       integration: {
-        root: `${ROOTS.DASHBOARD}/parametres/integration`
+        root: `${ROOTS.DASHBOARD}/parametres/integration`,
       },
     },
     account: {
@@ -137,8 +139,8 @@ export const paths = {
       root: `${ROOTS.DASHBOARD}/aide`,
       onboarding: `${ROOTS.DASHBOARD}/aide/onboarding`,
       amelioration: `${ROOTS.DASHBOARD}/aide/demande-amelioration`,
-      parrainage : `${ROOTS.DASHBOARD}/aide/parrainage`,
-      urssaf : `${ROOTS.DASHBOARD}/aide/urssaf`,
+      parrainage: `${ROOTS.DASHBOARD}/aide/parrainage`,
+      urssaf: `${ROOTS.DASHBOARD}/aide/urssaf`,
     },
     two: `${ROOTS.DASHBOARD}/two`,
     three: `${ROOTS.DASHBOARD}/three`,
@@ -151,7 +153,7 @@ export const paths = {
   // SALARIES
   salaries: {
     root: ROOTS.SALARIES,
-    conges:{
+    conges: {
       root: `${ROOTS.SALARIES}/conges`,
     },
     transport: {
@@ -180,14 +182,17 @@ export const paths = {
     },
     compte: {
       root: `${ROOTS.SALARIES}/mon-compte`,
+      addBankAccount: `${ROOTS.SALARIES}/mon-compte/add-compte-bancaire`,
+      bankAccountDetails: (id) => `${ROOTS.SALARIES}/mon-compte/${id}`,
+      editBankAccount: (id) => `${ROOTS.SALARIES}/mon-compte/${id}/edit`,
     },
     aide: {
       root: `${ROOTS.SALARIES}/aide`,
       onboarding: `${ROOTS.SALARIES}/aide/onboarding`,
       amelioration: `${ROOTS.SALARIES}/aide/amelioration`,
-      parrainage : `${ROOTS.SALARIES}/aide/parrainage`,
-      urssaf : `${ROOTS.SALARIES}/aide/urssaf`,
-    }
+      parrainage: `${ROOTS.SALARIES}/aide/parrainage`,
+      urssaf: `${ROOTS.SALARIES}/aide/urssaf`,
+    },
   },
 
   // Comptable
@@ -232,6 +237,6 @@ export const paths = {
     },
     comptes: {
       root: `${ROOTS.COMPTABLE}/comptes`,
-    }
-}
+    },
+  },
 };

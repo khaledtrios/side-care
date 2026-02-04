@@ -1,4 +1,5 @@
 import { useTheme } from '@emotion/react';
+import { useLocation } from 'react-router';
 import React, { useState, useCallback } from 'react';
 
 import {
@@ -33,6 +34,8 @@ export default function OrganigrammePageView() {
   const router = useRouter();
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [isOpen, setOpen] = useState(null);
+  const Location = useLocation();
+  const isReadOnly = Location.pathname.includes('espace-salarie');
 
   const handleSelect = (node) => {
     // Only allow selection for teams
@@ -66,7 +69,11 @@ export default function OrganigrammePageView() {
             </IconButton>
             <Menu id="simple-menu" anchorEl={isOpen} onClose={handleClose} open={!!isOpen}>
               <MenuItem>Exporter en PDF</MenuItem>
-              <MenuItem onClick={() => router.push(paths.dashboard.equipes.root)}>
+              {/* Disable the menu item based on the isReadOnly condition */}
+              <MenuItem
+                disabled={isReadOnly} 
+                onClick={() => router.push(paths.dashboard.equipes.root)}
+              >
                 Créer ou modifier vos équipes
               </MenuItem>
             </Menu>

@@ -33,6 +33,9 @@ const Trombinoscope = lazy(() => import('src/pages/salaries/entreprise/index'));
 const Organigramme = lazy(() => import('src/pages/salaries/entreprise/organigramme'));
 
 const Account = lazy(() => import('src/pages/salaries/compte/index'));
+const BankAccount = lazy(() => import('src/pages/salaries/compte/bankAccount'))
+const BankAccountDetails = lazy(() => import('src/pages/salaries/compte/bankAccountDetails'))
+const EditBankAccount = lazy(() => import('src/pages/salaries/compte/editBankAccount'))
 
 const Aide = lazy(() => import('src/pages/salaries/aide/index'));
 const Onboarding = lazy(() => import('src/pages/salaries/aide/onboard'));
@@ -105,6 +108,9 @@ export const salariesRoutes = [
         path: 'mon-compte',
         children: [
           { index: true, element: <Account /> },
+          { path: 'add-compte-bancaire', element: <BankAccount /> },
+          { path: ':id', element: <BankAccountDetails /> },
+          { path: ':id/edit', element: <EditBankAccount /> },
         ],
       },
       {

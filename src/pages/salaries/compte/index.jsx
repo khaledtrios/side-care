@@ -1,5 +1,7 @@
 import { Helmet } from 'react-helmet-async';
+
 import { CONFIG } from 'src/config-global';
+
 import ComptePageView from 'src/sections/salaires/compte/views/compte-page-view';
 
 // ----------------------------------------------------------------------
@@ -27,9 +29,9 @@ const userData = {
   phonePro: '',
   emergencyContacts: [
     {
-      lastName: 'Ouchaou',
-      firstName: 'Wissem',
-      phone: '28065313',
+      lastName: 'Sassi',
+      firstName: 'Faker',
+      phone: '90001002',
       relationship: 'Autre',
       priority: 1,
     },

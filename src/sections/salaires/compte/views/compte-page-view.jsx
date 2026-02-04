@@ -44,13 +44,13 @@ const TABS = [
   {
     value: 'password',
     label: 'Mot de passe',
-    icon: <Iconify icon="material-symbols:lock-outline" width={24} />,
+    icon: <Iconify icon="solar:lock-outline" width={23} />,
     comp: <PasswordTab />,
   },
   {
     value: '2auth',
     label: '2FA',
-    icon: <Iconify icon="material-symbols:lock-outline" width={24} />,
+    icon: <Iconify icon="solar:shield-keyhole-bold-duotone" width={24} />,
     comp: <SecurityTab />,
   },
 ];
@@ -136,7 +136,7 @@ export default function ComptePageView({ user }) {
   return (
     <DashboardContent>
       <CustomBreadcrumbs
-        heading="Wissem Chihaoui"
+        heading="Faker Chihaoui"
         links={[
           { name: 'Tableau de bord', href: paths.dashboard.root },
           { name: 'Employés', href: paths.dashboard.employes.root },

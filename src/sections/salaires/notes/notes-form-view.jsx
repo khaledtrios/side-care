@@ -48,7 +48,7 @@ export default function NotesFormView({ currentNote }) {
         await new Promise((resolve) => setTimeout(resolve, 500));
         reset();
         toast.success(currentNote ? 'Mise à jour réussie !' : 'Créez le succès !');
-        router.push(paths.dashboard.evp.notes.root);
+        router.push(paths.salaries.notes.root);
         console.info('DATA', data);
       } catch (error) {
         console.error(error);

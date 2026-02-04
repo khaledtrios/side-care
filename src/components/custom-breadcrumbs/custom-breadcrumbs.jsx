@@ -11,6 +11,7 @@ export function CustomBreadcrumbs({
   links,
   action,
   heading,
+  description,
   moreLink,
   activeLast,
   slotProps,
@@ -22,6 +23,13 @@ export function CustomBreadcrumbs({
   const renderHeading = (
     <Typography variant="h4" sx={{ mb: 2, ...slotProps?.heading }}>
       {heading}
+    </Typography>
+  );
+
+  // Render description if provided
+  const renderDescription = description && (
+    <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
+      {description}
     </Typography>
   );
 
@@ -57,6 +65,7 @@ export function CustomBreadcrumbs({
       <Box display="flex" alignItems="center">
         <Box sx={{ flexGrow: 1 }}>
           {heading && renderHeading}
+          {description && renderDescription}
 
           {!!links.length && renderLinks}
         </Box>

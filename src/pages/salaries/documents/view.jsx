@@ -1,6 +1,8 @@
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
+
 import { CONFIG } from 'src/config-global';
+
 import DocumentViewPage from 'src/sections/salaires/documents/views/document-view-page';
 
 // Sample document data (for demonstration)

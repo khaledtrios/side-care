@@ -12,12 +12,12 @@ import {
   formHelperTextClasses,
 } from '@mui/material';
 
-export default function TransportTableToolbar({ filters, dateError, onResetPage }) {
+export default function TransportTableToolbar({ filters, dateError, onResetPage, transportTypes }) {
 
-  const handleFilterEntreprise = useCallback(
+  const handleFilterTransportType = useCallback(
     (event) => {
       onResetPage();
-      filters.setState({ entreprise: event.target.value });
+      filters.setState({ transportType: event.target.value });
     },
     [filters, onResetPage]
   );
@@ -37,7 +37,7 @@ export default function TransportTableToolbar({ filters, dateError, onResetPage 
     },
     [filters, onResetPage]
   );
-  
+
   return (
     <Stack
       spacing={2}
@@ -45,15 +45,15 @@ export default function TransportTableToolbar({ filters, dateError, onResetPage 
       direction={{ xs: 'column', md: 'row' }}
       sx={{ p: 2.5, pr: { xs: 2.5, md: 1 } }}
     >
-      {/* Entreprise Select */}
-      <FormControl sx={{ flexShrink: 0, width: { xs: 1, md: 220 } }}>
-        <InputLabel htmlFor="filter-entreprise">Entreprise</InputLabel>
+      {/* Type de transport Select */}
+      <FormControl sx={{ flexShrink: 2, width: { xs: 1, md: 240 } }}>
+        <InputLabel htmlFor="filter-transport-type">Type de transport</InputLabel>
         <Select
-          value={filters.state.entreprise}
-          onChange={handleFilterEntreprise}
-          input={<OutlinedInput label="Entreprise" />}
-          inputProps={{ id: 'filter-entreprise' }}
-          renderValue={(selected) => selected}
+          value={filters.state.transportType}
+          onChange={handleFilterTransportType}
+          input={<OutlinedInput label="Type de transport" />}
+          inputProps={{ id: 'filter-transport-type' }}
+          renderValue={(selected) => selected || 'Toutes'} // Display 'Toutes' when no value is selected
           sx={{ textTransform: 'capitalize' }}
         >
           <MenuItem value="">Toutes</MenuItem>
@@ -66,7 +66,7 @@ export default function TransportTableToolbar({ filters, dateError, onResetPage 
         </Select>
       </FormControl>
 
-     
+      {/* Date de début Picker */}
       <DatePicker
         label="Date de début"
         value={filters.state.startDate}
@@ -75,6 +75,7 @@ export default function TransportTableToolbar({ filters, dateError, onResetPage 
         sx={{ maxWidth: { md: 200 } }}
       />
 
+      {/* Date de fin Picker */}
       <DatePicker
         label="Date de fin"
         value={filters.state.endDate}

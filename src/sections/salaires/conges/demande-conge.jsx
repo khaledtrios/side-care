@@ -125,11 +125,11 @@ export default function DemandeConge() {
 
       {/* ---- New Calendar Section ---- */}
 
-      <Box sx={{ p: 3 }}>
+      <Box sx={{ p: 3 }} >
         <Typography variant="h6" gutterBottom>
           Mon compteur de congés
         </Typography>
-        <Typography variant="body2">
+        <Typography variant="body2" padding={2}>
           Solde des jours disponibles à la fin du mois (décomptant les absences posées futures). Ces
           données sont fournies à titre indicatif. Demandez à votre responsable RH de les remplir
           afin d&apos;avoir accès à votre solde de congés payés.
@@ -137,7 +137,7 @@ export default function DemandeConge() {
         <Stack
           direction="row"
           spacing={2}
-          sx={{ border: '1px solid', borderColor: 'divider', borderRadius: 1, p: 2 }}
+          sx={{ border: '1px solid', borderColor: 'divider', borderRadius: 1, p: 2, backgroundColor: '#f9f3c1', }}
         >
           <Typography variant="body2">Solde de congés payés : 5 jours</Typography>
           <Typography variant="body2">Solde de RTT : 10 jours</Typography>

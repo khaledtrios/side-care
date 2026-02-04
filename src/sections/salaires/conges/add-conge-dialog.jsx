@@ -16,6 +16,8 @@ import {
   FormControlLabel,
 } from '@mui/material';
 
+import { Iconify } from 'src/components/iconify';
+
 const congeTypes = [
   { value: 'cp', label: 'Congé payé' },
   { value: 'rtt', label: 'RTT' },
@@ -125,7 +127,7 @@ export default function AddCongeDialog({ open, onClose, onSave }) {
           <Button
             variant="contained"
             component="label"
-            // startIcon={<CloudUploadIcon />}
+            startIcon={<Iconify icon="eva:cloud-upload-fill" />}
           >
             {form.justificatif ? form.justificatif.name : 'Ajouter un justificatif'}
             <input type="file" hidden onChange={handleFileChange} />

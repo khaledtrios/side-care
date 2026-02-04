@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Grid from '@mui/material/Unstable_Grid2';
 import {
@@ -7,6 +7,7 @@ import {
   Card,
   List,
   Paper,
+  Alert,
   Button,
   ListItem,
   useTheme,
@@ -107,7 +108,17 @@ export default function SalariesDashboardView() {
   const [demandeConge, setDemandeConge] = useState([]);
   const [selectedConge, setSelectedConge] = useState(null);
 
-  
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  useEffect(() => {
+    // Check sessionStorage if the alert should show
+    const justLoggedIn = sessionStorage.getItem('justLoggedIn');
+
+    if (justLoggedIn === 'true') {
+      setShowSuccess(true);
+      sessionStorage.removeItem('justLoggedIn'); // remove it so refresh hides it
+    }
+  }, []);
 
   const table = useTable({ defaultOrderBy: 'startDate' });
   const filters = useSetState({
@@ -151,10 +162,27 @@ export default function SalariesDashboardView() {
   return (
     <>
       <DashboardContent>
-        <Typography variant="h4" sx={{ mb: { xs: 3, md: 5 } }}>
-          Bonjour, Admin 
+        {!showSuccess && (
+          <Alert
+            severity="success"
+            sx={{
+              mb: 3,
+              minHeight: 60, // sets minimum height
+              display: 'flex',
+              alignItems: 'center',
+              fontSize: '1.2rem',
+            }}
+          >
+            Connecté(e) avec succès.
+          </Alert>
+        )}
+        <Typography variant="h1" sx={{ mb: { xs: 2, md: 2 } }}>
+          Bonjour Admin,
         </Typography>
-        <Card sx={{ mb: 3 }}>
+        <Typography variant="h6" sx={{ mb: { xs: 2, md: 4 } }}>
+          Bienvenue sur votre tableau de bord
+        </Typography>
+        <Card sx={{ mb: 3 }} marrgin={2}>
           <CardHeader
             title="Mes congés à venir"
             action={
@@ -216,7 +244,7 @@ export default function SalariesDashboardView() {
         </Card>
         <Card>
           <CardHeader
-            title="Mes congés à venir"
+            title="Mes documents"
             action={
               <Button
                 startIcon={<Iconify icon="mingcute:calendar-add-line" />}

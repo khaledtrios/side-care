@@ -2,14 +2,13 @@ import React from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 
 import Grid from '@mui/material/Unstable_Grid2';
-import { Box, Card, Stack, Button, Divider, MenuItem, Typography } from '@mui/material';
+import { Box, Card, Stack, Button, Divider, MenuItem, Typography, Alert } from '@mui/material';
 
 import { fData } from 'src/utils/format-number';
 
 import { Label } from 'src/components/label';
 import { Field } from 'src/components/hook-form';
 import { Iconify } from 'src/components/iconify';
-
 
 export function PersonalTab() {
   const { control } = useFormContext();
@@ -36,9 +35,9 @@ export function PersonalTab() {
       {/* Avatar & Personal Info Card */}
       <Grid xs={12} md={4}>
         <Card sx={{ pt: 10, pb: 5, px: 3, textAlign: 'center' }}>
-          <Label color="success" sx={{ position: 'absolute', top: 24, right: 24 }}>
+          {/* <Label color="success" sx={{ position: 'absolute', top: 24, right: 24 }}>
             Active
-          </Label>
+          </Label> */}
           <Field.UploadAvatar
             name="photoURL"
             maxSize={3145728}
@@ -58,15 +57,18 @@ export function PersonalTab() {
               </Typography>
             }
           />
-          <Button variant="soft" color="error" sx={{ mt: 3 }}>
+          {/* <Button variant="soft" color="error" sx={{ mt: 3 }}>
             Supprimer le collaborateur
-          </Button>
+          </Button> */}
         </Card>
       </Grid>
 
       {/* Main Form Card */}
       <Grid xs={12} md={8}>
         <Card sx={{ p: 3 }}>
+          <Alert severity="success" sx={{ mb: 3, padding: '12px'}}>
+            Merci de contacter votre RH si vous modifiez une de ces informations.
+          </Alert>
           <Box
             rowGap={3}
             columnGap={2}

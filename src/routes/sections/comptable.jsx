@@ -19,8 +19,8 @@ const Cotisation = lazy(() => import('src/pages/comptable/cotisation/index'));
 const Devis = lazy(() => import('src/pages/comptable/devis/index'));
 
 const Employes = lazy(() => import('src/pages/comptable/employes/index'));
-const EmployesMutuelles = lazy(() => import('src/pages/comptable/employes/mutuelles'));
-const EmployesPrevoyance = lazy(() => import('src/pages/comptable/employes/prevoyance'));
+// const EmployesMutuelles = lazy(() => import('src/pages/comptable/employes/mutuelles'));
+// const EmployesPrevoyance = lazy(() => import('src/pages/comptable/employes/prevoyance'));
 const EmployesHistorique = lazy(() => import('src/pages/comptable/employes/historique'));
 const EmployesView = lazy(() => import('src/pages/comptable/employes/view'));
 const EmployesAdd = lazy(() => import('src/pages/comptable/employes/add'));
@@ -79,8 +79,8 @@ export const comptableRoutes = [
         path: 'employes',
         children: [
           { index: true, element: <Employes /> },
-          { path: 'mutuelles', element: <EmployesMutuelles /> },
-          { path: 'prevoyance', element: <EmployesPrevoyance /> },
+          // { path: 'mutuelles', element: <EmployesMutuelles /> },
+          // { path: 'prevoyance', element: <EmployesPrevoyance /> },
           { path: 'historique', element: <EmployesHistorique /> },
           { path: ':id/view', element: <EmployesView /> },
           { path: 'add', element: <EmployesAdd /> },

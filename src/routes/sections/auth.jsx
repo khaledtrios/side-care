@@ -15,6 +15,7 @@ import { GuestGuard } from 'src/auth/guard';
 const Jwt = {
   SignInPage: lazy(() => import('src/pages/auth/jwt/sign-in')),
   SignUpPage: lazy(() => import('src/pages/auth/jwt/sign-up')),
+  ForgetPassWord: lazy(()=> import('src/pages/auth/jwt/forget')),
 };
 
 const authJwt = {
@@ -36,6 +37,16 @@ const authJwt = {
         <GuestGuard>
           <AuthSplitLayout>
             <Jwt.SignUpPage />
+          </AuthSplitLayout>
+        </GuestGuard>
+      ),
+    },
+    {
+      path: 'forget-pass-word',
+      element: (
+        <GuestGuard>
+          <AuthSplitLayout>
+            <Jwt.ForgetPassWord />
           </AuthSplitLayout>
         </GuestGuard>
       ),

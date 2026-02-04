@@ -12,10 +12,7 @@ import { comptableRoutes } from './comptable';
 
 export function Router() {
   return useRoutes([
-    {
-      path: '/',
-      element: <Navigate to={CONFIG.auth.redirectPath} replace />,
-    },
+    // Root ('/') is handled in mainRoutes to show the landing page
 
     // Auth
     ...authRoutes,

@@ -1,7 +1,18 @@
 import { toast } from 'sonner';
 import React, { useState, useCallback } from 'react';
 
-import { Box, Card, Stack, Table, Button, Tooltip, TableBody, IconButton } from '@mui/material';
+import {
+  Box,
+  Card,
+  Stack,
+  Table,
+  Button,
+  Tooltip,
+  TableBody,
+  IconButton,
+  Typography,
+  Divider,
+} from '@mui/material';
 
 import { paths } from 'src/routes/paths';
 import { useRouter } from 'src/routes/hooks';
@@ -17,9 +28,19 @@ import { SalariesContent } from 'src/layouts/salarie';
 import { Iconify } from 'src/components/iconify';
 import { Scrollbar } from 'src/components/scrollbar';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
-import { useTable, emptyRows, rowInPage, TableNoData, getComparator, TableEmptyRows, TableHeadCustom, TableSelectedAction } from 'src/components/table';
+import {
+  useTable,
+  emptyRows,
+  rowInPage,
+  TableNoData,
+  getComparator,
+  TableEmptyRows,
+  TableHeadCustom,
+  TableSelectedAction,
+} from 'src/components/table';
 
 import TransportTableRow from '../table-transport-row';
+import TransportTableToolbar from '../transport-table-toolbar';
 
 const TABLE_HEAD = [
   { id: 'date', label: 'Période' },
@@ -34,87 +55,96 @@ const TABLE_HEAD = [
 const _transportList = [
   {
     id: 1,
-    entreprise: 'Portorium Consulting',
     date: today(),
     type: 'Transport domicile-travail',
     amount_total: 120, // total spent
-    amount_rembourse: 100, // reimbursed
-    prise: '50%', // % covered by employer
     justificatif: '/files/justificatif1.pdf', // or false/null if none
+    frequency: 'Mensuelle', // Frequency of justification
+    startDate: '2025-11', // Start date of the transport
+    endDate: '2026-11', // End date of the transport
   },
   {
     id: 2,
-    entreprise: 'Sofrecom',
     date: today(),
     type: 'Forfait mensuel',
     amount_total: 80,
-    amount_rembourse: 80,
-    prise: '100%',
     justificatif: '', // no file
+    frequency: 'Mensuelle', // Frequency of justification
+    startDate: '2025-12', // Start date of the transport
+    endDate: '2026-12', // End date of the transport
   },
 ];
 
+
 export default function TransportViewPage() {
-   const table = useTable({ defaultOrderBy: 'date' });
-  
-    const confirm = useBoolean();
-  
-    const router = useRouter();
-  
-    const [tableData, setTableData] = useState(_transportList);
-  
-    const filters = useSetState({
-      entreprise: '',
-      startDate: null,
-      endDate: null,
-    });
-  
-    const dateError = fIsAfter(filters.state.startDate, filters.state.endDate);
-  
-    const dataFiltered = applyFilter({
-      inputData: tableData,
-      comparator: getComparator(table.order, table.orderBy),
-      filters: filters.state,
-      dateError,
-    });
-  
-    const dataInPage = rowInPage(dataFiltered, table.page, table.rowsPerPage);
-  
-    const canReset =
-      !!filters.state.entreprise || (!!filters.state.startDate && !!filters.state.endDate);
-  
-    const notFound = (!dataFiltered.length && canReset) || !dataFiltered.length;
-  
-    const handleDeleteRow = useCallback(
-      (id) => {
-        const deleteRow = tableData.filter((row) => row.id !== id);
-  
-        toast.success('La suppression réussie !');
-  
-        setTableData(deleteRow);
-  
-        table.onUpdatePageDeleteRow(dataInPage.length);
-      },
-      [dataInPage.length, table, tableData]
-    );
-  
-    const handleViewRow = useCallback(
-      (id) => {
-        router.push(paths.dashboard.evp.notes.view(id));
-      },
-      [router]
-    );
-  
+  const table = useTable({ defaultOrderBy: 'date' });
+
+  const confirm = useBoolean();
+
+  const router = useRouter();
+
+  const [tableData, setTableData] = useState(_transportList);
+
+  const filters = useSetState({
+    entreprise: '',
+    startDate: null,
+    endDate: null,
+  });
+
+  const dateError = fIsAfter(filters.state.startDate, filters.state.endDate);
+
+  const dataFiltered = applyFilter({
+    inputData: tableData,
+    comparator: getComparator(table.order, table.orderBy),
+    filters: filters.state,
+    dateError,
+  });
+
+  const dataInPage = rowInPage(dataFiltered, table.page, table.rowsPerPage);
+
+  const canReset =
+    !!filters.state.entreprise || (!!filters.state.startDate && !!filters.state.endDate);
+
+  const notFound = (!dataFiltered.length && canReset) || !dataFiltered.length;
+
+  const handleDeleteRow = useCallback(
+    (id) => {
+      const deleteRow = tableData.filter((row) => row.id !== id);
+
+      toast.success('La suppression réussie !');
+
+      setTableData(deleteRow);
+
+      table.onUpdatePageDeleteRow(dataInPage.length);
+    },
+    [dataInPage.length, table, tableData]
+  );
+
+  const handleViewRow = useCallback(
+    (id) => {
+      router.push(paths.dashboard.evp.notes.view(id));
+    },
+    [router]
+  );
+
+  const handleEditRow = useCallback(
+    (id) => {
+      router.push(`${paths.salaries.transport.editRecurrent.replace(":id", id)}`); // This ensures the dynamic `id` is passed into the edit page URL.
+    },
+    [router]
+  );
+
   return (
     <SalariesContent>
       <CustomBreadcrumbs
         heading="Mes titres de transport"
+        description="Retrouvez tous vos titres de transport. Déposez tous vos nouveaux justificatifs afin de vous faire rembourser"
         links={[
           { name: 'Tableau de bord', href: paths.salaries.root },
           { name: 'Mes titres de transport' },
         ]}
         action={
-          <Stack flexDirection="row" spacing={1}>
+          <Stack flexDirection="column" spacing={2}>
             <Button
               startIcon={<Iconify icon="mingcute:add-line" />}
               variant="contained"
@@ -137,9 +167,29 @@ export default function TransportViewPage() {
         }
         sx={{ mb: { xs: 3, md: 5 } }}
       />
-
+      
+      <Card sx={{ mb: { xs: 3, md: 3, minHeight: 44 } }}>
+        <Stack direction="column" spacing={1} sx={{ p: 2 }} divider={<Divider flexItem sx={{ borderStyle: 'dashed' }} />}>
+          {tableData.map((row) => (
+            <Typography variant="body1" sx={{ flexGrow: 1 }} key={row.id}>
+              Vous avez un titre de transport récurrent : {row.type} d’un montant de {row.amount_total} € par mois.
+              <Tooltip title="Modifier" arrow>
+                <IconButton color="primary" size='large' onClick={() => handleEditRow(row.id)}>
+                  <Iconify icon="mdi:pencil-outline"/>
+                </IconButton>
+              </Tooltip>
+            </Typography>
+          ))}
+        </Stack>
+      </Card>
+      
       <Card>
         {/* Toolbar  */}
+        <TransportTableToolbar
+          filters={filters}
+          onResetPage={table.onResetPage}
+          dateError={dateError}
+        />
         {/* Filter Result  */}
 
         <Box sx={{ position: 'relative' }}>
@@ -171,7 +221,6 @@ export default function TransportViewPage() {
                 rowCount={dataFiltered.length}
                 onSort={table.onSort}
               />
-
               <TableBody>
                 {dataFiltered
                   .slice(
@@ -188,12 +237,10 @@ export default function TransportViewPage() {
                       onViewRow={() => handleViewRow(row.id)}
                     />
                   ))}
-
                 <TableEmptyRows
                   height={table.dense ? 56 : 56 + 20}
                   emptyRows={emptyRows(table.page, table.rowsPerPage, dataFiltered.length)}
                 />
-
                 <TableNoData notFound={notFound} />
               </TableBody>
             </Table>
@@ -203,6 +250,7 @@ export default function TransportViewPage() {
     </SalariesContent>
   );
 }
+
 function applyFilter({ inputData, comparator, filters, dateError }) {
   const { entreprise, startDate, endDate } = filters;
 

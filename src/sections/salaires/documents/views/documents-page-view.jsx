@@ -112,7 +112,8 @@ export default function DocumentsPageView() {
   return (
     <SalariesContent>
       <CustomBreadcrumbs
-        heading="Mes documents"
+        heading="Espace documents"
+        description="Retrouvez sur cette page l'ensemble des documents vous concernant que vous avez déposés"
         links={[{ name: 'Tableau de bord', href: paths.salaries.root }, { name: 'Mes documents' }]}
         action={
           <Button

@@ -4,12 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import LoadingButton from '@mui/lab/LoadingButton';
-import {
-  Box,
-  Card,
-  Alert,
-  Stack,
-} from '@mui/material';
+import { Box, Card, Alert, Stack, Divider, Typography } from '@mui/material';
 
 import { toast } from 'src/components/snackbar';
 import { Form, Field } from 'src/components/hook-form';
@@ -58,28 +53,43 @@ export function PasswordTab() {
   return (
     <Form methods={methods} onSubmit={onSubmit}>
       <Card sx={{ p: 3 }}>
-        <Stack spacing={3}>
-          <Alert severity="info">
-            Votre mot de passe doit contenir au minimum <strong>8 caractères</strong>, <strong>1 chiffre</strong>, <strong>1 majuscule</strong> et <strong>1 caractère spécial</strong>.
+        <Stack spacing={2}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+            Informations confidentielles
+          </Typography>
+          <Typography variant="body2" sx={{ mb: 0.5 }}>
+            Votre mot de passe est strictement personnel
+          </Typography>
+          <Divider sx={{ borderStyle: 'dashed' }} />
+          <Alert
+            severity="warning"
+            sx={{
+              padding: '16px',
+            }}
+          >
+            Votre mot de passe doit contenir au minimum <strong>8 caractères</strong>,{' '}
+            <strong>1 chiffre</strong>, <strong>1 majuscule</strong> et{' '}
+            <strong>1 caractère spécial</strong>.
           </Alert>
 
-          <Field.Text
-            name="newPassword"
-            type="password"
-            label="Nouveau mot de passe"
-          />
+          {/* Form fields */}
+          <Field.Text name="newPassword" type="password" label="Nouveau mot de passe" />
 
-          <Field.Text
-            name="confirmPassword"
-            type="password"
-            label="Confirmer le mot de passe"
-          />
+          <Field.Text name="confirmPassword" type="password" label="Confirmer le mot de passe" />
 
           <Box display="flex" justifyContent="flex-end">
             <LoadingButton
               type="submit"
               variant="contained"
               loading={isSubmitting}
+              sx={{
+                padding: '12px 24px',
+                fontSize: '1rem',
+                '&:hover': {
+                  backgroundColor: '#f57f17',
+                },
+                width: 'auto',
+              }}
             >
               Enregistrer
             </LoadingButton>

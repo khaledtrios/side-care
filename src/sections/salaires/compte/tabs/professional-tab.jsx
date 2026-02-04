@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router';
 import { useFormContext } from 'react-hook-form';
 
 import Grid from '@mui/material/Unstable_Grid2';
@@ -20,6 +21,9 @@ import { Field } from 'src/components/hook-form';
 export function ProfessionalTab() {
   const { watch } = useFormContext();
   const [formats, setFormats] = useState(() => watch('formats', ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']));
+  const Location = useLocation();
+  const isReadOnly = Location.pathname.includes('espace-salaries')
+  console.log(isReadOnly);
 
   const handleFormat = (event, newFormats) => {
     setFormats(newFormats);
@@ -68,7 +72,7 @@ export function ProfessionalTab() {
               xs: 'repeat(1, 1fr)',
             }}
           >
-            <Field.Select name="company" multiple label="Entreprise">
+            <Field.Select name="company" multiple label="Entreprise" disabled={isReadOnly}>
               <MenuItem value="">Aucun</MenuItem>
               <Divider sx={{ borderStyle: 'dashed' }} />
               {ENTREPRISE_LIST.map((option) => (
@@ -77,9 +81,9 @@ export function ProfessionalTab() {
                 </MenuItem>
               ))}
             </Field.Select>
-            <Field.Text name="matricule" label="Matricule de l'employé" />
-            <Field.Text name="poste" label="Poste" />
-            <Field.Select name="team" multiple label="Equipe">
+            <Field.Text name="matricule" label="Matricule de l'employé" disabled={isReadOnly}/>
+            <Field.Text name="poste" label="Poste" disabled={isReadOnly}/>
+            <Field.Select name="team" multiple label="Equipe" disabled={isReadOnly}>
               <MenuItem value="">Aucun</MenuItem>
               <Divider sx={{ borderStyle: 'dashed' }} />
               {[
@@ -91,7 +95,7 @@ export function ProfessionalTab() {
                 </MenuItem>
               ))}
             </Field.Select>
-            <Field.Select name="manager" label="Manager">
+            <Field.Select name="manager" label="Manager" disabled={isReadOnly}>
               <MenuItem value="">Aucun</MenuItem>
               <Divider sx={{ borderStyle: 'dashed' }} />
               {[
@@ -103,7 +107,7 @@ export function ProfessionalTab() {
                 </MenuItem>
               ))}
             </Field.Select>
-            <Field.Select name="empManager" multiple label="Employés managés">
+            <Field.Select name="empManager" multiple label="Employés managés" disabled={isReadOnly}>
               <MenuItem value="">Aucun</MenuItem>
               <Divider sx={{ borderStyle: 'dashed' }} />
               {[
@@ -115,7 +119,7 @@ export function ProfessionalTab() {
                 </MenuItem>
               ))}
             </Field.Select>
-            <Field.Text name="emailPro" label="E-mail professionnel" />
+            <Field.Text name="emailPro" label="E-mail professionnel" disabled={isReadOnly}/>
             <Field.Phone name="phonePro" label="Téléphone professionnel" />
             <Field.Switch name="arret" labelPlacement="start" label="En arrêt" />
             <Field.Switch name="handicap" labelPlacement="start" label="Travailleur handicapé" />
@@ -141,14 +145,15 @@ export function ProfessionalTab() {
               sm: 'repeat(2, 1fr)',
             }}
           >
-            <Field.DatePicker name="startDate" label="Date de début" />
-            <Field.DatePicker name="endDate" label="Date de fin" />
-            <Field.DatePicker name="endDateEssai" label="Date de fin de période d’essai" />
+            <Field.DatePicker name="startDate" label="Date de début" disabled={isReadOnly}/>
+            <Field.DatePicker name="endDate" label="Date de fin" disabled={isReadOnly}/>
+            <Field.DatePicker name="endDateEssai" label="Date de fin de période d’essai" disabled={isReadOnly}/>
             <Field.DatePicker
               name="endDateSecondEssai"
               label="Date de fin de la 2ème période d’essai"
+              disabled={isReadOnly}
             />
-            <Field.Select name="contractType" multiple label="Type de contrat">
+            <Field.Select name="contractType" multiple label="Type de contrat" disabled={isReadOnly}>
               <MenuItem value="">Aucun</MenuItem>
               <Divider sx={{ borderStyle: 'dashed' }} />
               {[
@@ -160,7 +165,7 @@ export function ProfessionalTab() {
                 </MenuItem>
               ))}
             </Field.Select>
-            <Field.Select name="college" multiple label="Collége">
+            <Field.Select name="college" multiple label="Collége" disabled={isReadOnly}>
               <MenuItem value="">Aucun</MenuItem>
               <Divider sx={{ borderStyle: 'dashed' }} />
               {[
@@ -172,8 +177,8 @@ export function ProfessionalTab() {
                 </MenuItem>
               ))}
             </Field.Select>
-            <Field.Text name="salary" label="Salaire annuel brut" />
-            <Field.Select name="period" label="Période de versement des salaires">
+            <Field.Text name="salary" label="Salaire annuel brut" disabled={isReadOnly}/>
+            <Field.Select name="period" label="Période de versement des salaires" disabled={isReadOnly}>
               <MenuItem value="">Aucun</MenuItem>
               <Divider sx={{ borderStyle: 'dashed' }} />
               {[
@@ -188,8 +193,8 @@ export function ProfessionalTab() {
                 </MenuItem>
               ))}
             </Field.Select>
-            <Field.Text name="position" label="Position" />
-            <Field.Text name="coefficient" label="Coefficient" />
+            <Field.Text name="position" label="Position" disabled={isReadOnly}/>
+            <Field.Text name="coefficient" label="Coefficient" disabled={isReadOnly}/>
             <Box>
               <InputLabel>Contract de travail</InputLabel>
               <Field.UploadBox sx={{ width: 1 }} name="contract" label="Contrat de travail" />
@@ -204,7 +209,7 @@ export function ProfessionalTab() {
           }}
         >
           <CardHeader title="Temps de travail" sx={{ pb: 3 }} />
-          <ToggleButtonGroup sx={{ mb: 2 }} color="primary" value={formats} onChange={handleFormat}>
+          <ToggleButtonGroup sx={{ mb: 2 }} color="primary" value={formats} onChange={handleFormat} disabled={isReadOnly} >
             {formatContent}
           </ToggleButtonGroup>
           <Field.Text name="duree" label="Durée de travail hebdomadaire" />

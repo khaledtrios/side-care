@@ -157,7 +157,7 @@ export default function EmployeViewPage() {
   return (
     <DashboardContent>
         <CustomBreadcrumbs
-          heading="Wissem Chihaoui"
+          heading="Faker Chihaoui"
           links={[
             { name: 'Tableau de bord', href: paths.dashboard.root },
             { name: 'Employés', href: paths.dashboard.employes.root },

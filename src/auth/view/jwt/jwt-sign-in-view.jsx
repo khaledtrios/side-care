@@ -1,6 +1,7 @@
 import { z as zod } from 'zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useLocation } from 'react-router-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import Box from '@mui/material/Box';
@@ -43,6 +44,29 @@ export function JwtSignInView() {
 
   const { checkUserSession } = useAuthContext();
 
+  // Using useLocation hook to access the current URL path
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  // Get the returnTo parameter from the URL
+  const returnTo = queryParams.get('returnTo'); // This will give '/espace-salaries' or whatever is in the query string
+  let getTitle;
+
+  switch (returnTo) {
+    case '/espace-salaries':
+      getTitle = 'Espace Salariés';
+      break;
+    case '/dashboard':
+      getTitle = 'Espace Entreprise';
+      break;
+    case '/espace-partenaire':
+      getTitle = 'Espace Comptable';
+      break;
+    // add more cases as needed
+    default:
+      getTitle = 'Espace Side Care';
+  }
+
+
   const [errorMsg, setErrorMsg] = useState('');
 
   const password = useBoolean();
@@ -81,7 +105,7 @@ export function JwtSignInView() {
       <Box gap={1.5} display="flex" flexDirection="column">
         <Link
           component={RouterLink}
-          href="#"
+          to={`${paths.auth.jwt.forgetPassword}?returnTo=${returnTo}`}
           variant="body2"
           color="inherit"
           sx={{ alignSelf: 'flex-end' }}
@@ -122,9 +146,9 @@ export function JwtSignInView() {
   );
 
   return (
-    <>
+    <>  
       <FormHead
-        title="Connexion à votre espace entreprise"
+        title={`Connexion à votre compte - ${getTitle}`}
         description={
           <>
             {`Je n'ai pas encore un compte ? `}
