@@ -32,6 +32,15 @@ export const signInWithPassword = async ({ email, password }) => {
     const accessToken = resolveAccessToken(res);
 
     if (!accessToken) {
+      try {
+        console.error('Sign-in response did not include token:', {
+          status: res && res.status,
+          data: res && res.data,
+        });
+      } catch (e) {
+        console.error('Unable to log sign-in response:', e);
+      }
+
       throw new Error('Access token not found in response');
     }
 
@@ -59,6 +68,15 @@ export const signUp = async ({ email, password, firstName, lastName }) => {
     const accessToken = resolveAccessToken(res);
 
     if (!accessToken) {
+      try {
+        console.error('Sign-up response did not include token:', {
+          status: res && res.status,
+          data: res && res.data,
+        });
+      } catch (e) {
+        console.error('Unable to log sign-up response:', e);
+      }
+
       throw new Error('Access token not found in response');
     }
 
