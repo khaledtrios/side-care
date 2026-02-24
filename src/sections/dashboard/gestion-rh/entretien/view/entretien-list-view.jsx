@@ -146,8 +146,13 @@ export default function EntretienListView() {
           { name: 'Entretiens' },
         ]}
         action={
-          <Stack flexDirection="row" spacing={1}>
+          <Stack
+            direction={{ xs: 'column', sm: 'row' }}
+            spacing={1}
+            sx={{ width: { xs: '100%', sm: 'auto' }, whiteSpace: 'nowrap' }}
+          >
             <Button
+              fullWidth
               startIcon={<Iconify icon="mingcute:add-line" />}
               variant="contained"
               color="primary"
@@ -156,7 +161,9 @@ export default function EntretienListView() {
             >
               Créer un entretien
             </Button>
+
             <Button
+              fullWidth
               LinkComponent={RouterLink}
               href={paths.dashboard.gestionRh.entretien.types(_entretiens[0]?.id)}
               startIcon={<Iconify icon="mdi:cog-outline" />}
@@ -165,37 +172,40 @@ export default function EntretienListView() {
             >
               Personnaliser
             </Button>
-            <IconButton onClick={popover.onOpen}>
-              <Iconify icon="eva:more-vertical-fill" />
-            </IconButton>
-            <CustomPopover
-              open={popover.open}
-              anchorEl={popover.anchorEl}
-              onClose={popover.onClose}
-              slotProps={{ arrow: { placement: 'top-right' } }}
-            >
-              <MenuList>
-                <MenuItem
-                  onClick={() => {
-                    popover.onClose();
-                  }}
-                >
-                  Liste des entretiens (.xlsx)
-                </MenuItem>
-
-                <MenuItem
-                  onClick={() => {
-                    popover.onClose();
-                  }}
-                >
-                  Comptes-rendus d&apos;entretiens (.zip)
-                </MenuItem>
-              </MenuList>
-            </CustomPopover>
           </Stack>
         }
         sx={{ mb: { xs: 3, md: 5 } }}
       />
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: { xs: 'column', sm: 'row' },
+          gap: 2,
+          width: '100%',
+        }}
+      >
+        <Button
+          fullWidth
+          variant="contained"
+          startIcon={<Iconify icon="mdi:file-excel" />}
+          onClick={() => {
+            // Handle export XLSX
+          }}
+        >
+          Liste des entretiens (.xlsx)
+        </Button>
+
+        <Button
+          fullWidth
+          variant="outlined"
+          startIcon={<Iconify icon="mdi:folder-zip" />}
+          onClick={() => {
+            // Handle export ZIP
+          }}
+        >
+          Comptes-rendus d&apos;entretiens (.zip)
+        </Button>
+      </Box>
 
       <Card>
         <EntretienTableToolbar

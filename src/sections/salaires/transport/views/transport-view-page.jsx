@@ -144,7 +144,11 @@ export default function TransportViewPage() {
           { name: 'Mes titres de transport' },
         ]}
         action={
-          <Stack flexDirection="column" spacing={2}>
+          <Stack
+            flexDirection="column"
+            spacing={2}
+            sx={{ display: { xs: 'none', md: 'flex' } }}
+          >
             <Button
               startIcon={<Iconify icon="mingcute:add-line" />}
               variant="contained"
@@ -165,8 +169,33 @@ export default function TransportViewPage() {
             </Button>
           </Stack>
         }
-        sx={{ mb: { xs: 3, md: 5 } }}
+        sx={{ mb: { xs: 0, md: 5 } }}
       />
+
+      {/* Mobile-only action buttons under the breadcrumbs */}
+      <Box sx={{ display: { xs: 'flex', md: 'none' }, flexDirection: 'column', gap: 1, mt: 2, mb: { xs: 3, md: 0 } }}>
+        <Button
+          startIcon={<Iconify icon="mingcute:add-line" />}
+          variant="contained"
+          color="primary"
+          href={paths.salaries.transport.addRecurrent}
+          LinkComponent={RouterLink}
+          sx={{ width: '100%' }}
+        >
+          Ajouter titre de transport récurrent
+        </Button>
+
+        <Button
+          startIcon={<Iconify icon="mingcute:add-line" />}
+          variant="outlined"
+          color="primary"
+          href={paths.salaries.transport.addPonctuel}
+          LinkComponent={RouterLink}
+          sx={{ width: '100%' }}
+        >
+          Ajouter titre de transport ponctuel
+        </Button>
+      </Box>
       
       <Card sx={{ mb: { xs: 3, md: 3, minHeight: 44 } }}>
         <Stack direction="column" spacing={1} sx={{ p: 2 }} divider={<Divider flexItem sx={{ borderStyle: 'dashed' }} />}>

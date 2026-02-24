@@ -36,8 +36,7 @@ export default function AccountPageView() {
         heading="Mon compte"
         links={[
           { name: 'Tableau de bord', href: paths.dashboard.root },
-          { name: currentLabel, href: paths.dashboard.comptabilite.root },
-          { name: 'Liste' },
+          { name: currentLabel },
         ]}
         sx={{ mb: { xs: 3, md: 5 } }}
       />

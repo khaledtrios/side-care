@@ -75,21 +75,6 @@ export const navData = [
         icon: ICONS.folder,
       },
       {
-        title: "Mon entreprise et moi",
-        path:  paths.salaries.entreprise.root,
-        icon: ICONS.banking,
-        children : [
-            {
-                title: "Trombinoscope",
-                path: paths.salaries.entreprise.root
-            },
-            {
-                title: "Organigramme",
-                path: paths.salaries.entreprise.organigramme
-            },
-        ]
-      },
-      {
         title: "Mon compte",
         path:  paths.salaries.compte.root,
         icon: ICONS.user,

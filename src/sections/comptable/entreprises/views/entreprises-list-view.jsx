@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Box, Stack, Table, Button, TableBody } from '@mui/material';
+import { Box, Stack, Table, Button, TableBody, Card } from '@mui/material';
 
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
@@ -95,81 +95,79 @@ export default function EntreprisesListView() {
             >
               Ajouter une nouvelle entreprise
             </Button>
-            <Button color="primary" variant="outlined" LinkComponent={RouterLink} href={paths.comptable.entreprise.dsn}>
-              Importer des DSN
-            </Button>
           </Stack>
         }
         sx={{ mb: { xs: 3, md: 5 } }}
       />
-  
-      <EntrepriseListTableToolbar
-        filters={filters}
-        onResetPage={table.onResetPage}
-        options={{
-          conventionList: [
-            { value: '1', label: 'Accouvage et sélection avicoles' },
-            { value: '2', label: 'Aide à domicile et services à la personne' },
-            { value: '3', label: 'Agriculture et professions agricoles' },
-            { value: '4', label: 'Animation' },
-          ],
-          anneeDsnList: [
-            { value: '2024', label: '2024' },
-            { value: '2023', label: '2023' },
-            { value: '2022', label: '2022' },
-          ],
-        }}
-      />
-
-      <Box sx={{ position: 'relative' }}>
-        <TableSelectedAction
-          dense={table.dense}
-          numSelected={table.selected.length}
-          rowCount={dataFiltered.length}
-          onSelectAllRows={(checked) =>
-            table.onSelectAllRows(
-              checked,
-              dataFiltered.map((row) => row.id)
-            )
-          }
+      <Card sx={{ mb: 3 }}>
+        <EntrepriseListTableToolbar
+          filters={filters}
+          onResetPage={table.onResetPage}
+          options={{
+            conventionList: [
+              { value: '1', label: 'Accouvage et sélection avicoles' },
+              { value: '2', label: 'Aide à domicile et services à la personne' },
+              { value: '3', label: 'Agriculture et professions agricoles' },
+              { value: '4', label: 'Animation' },
+            ],
+            anneeDsnList: [
+              { value: '2024', label: '2024' },
+              { value: '2023', label: '2023' },
+              { value: '2022', label: '2022' },
+            ],
+          }}
         />
 
-        <Scrollbar sx={{ minHeight: 444 }}>
-          <Table size={table.dense ? 'small' : 'medium'} sx={{ minWidth: 960 }}>
-            <TableHeadCustom
-              order={table.order}
-              orderBy={table.orderBy}
-              headLabel={TABLE_HEAD}
-              rowCount={dataFiltered.length}
-              numSelected={table.selected.length}
-              onSort={table.onSort}
-            />
+        <Box sx={{ position: 'relative' }}>
+          <TableSelectedAction
+            dense={table.dense}
+            numSelected={table.selected.length}
+            rowCount={dataFiltered.length}
+            onSelectAllRows={(checked) =>
+              table.onSelectAllRows(
+                checked,
+                dataFiltered.map((row) => row.id)
+              )
+            }
+          />
 
-            <TableBody>
-              {dataFiltered
-                .slice(
-                  table.page * table.rowsPerPage,
-                  table.page * table.rowsPerPage + table.rowsPerPage
-                )
-                .map((row) => (
-                  <EntreprisesTableRow
-                    key={row.id}
-                    row={row}
-                    selected={table.selected.includes(row.id)}
-                    onSelectRow={() => table.onSelectRow(row.id)}
-                  />
-                ))}
-
-              <TableEmptyRows
-                height={table.dense ? 56 : 56 + 20}
-                emptyRows={emptyRows(table.page, table.rowsPerPage, dataFiltered.length)}
+          <Scrollbar sx={{ minHeight: 444 }}>
+            <Table size={table.dense ? 'small' : 'medium'} sx={{ minWidth: 960 }}>
+              <TableHeadCustom
+                order={table.order}
+                orderBy={table.orderBy}
+                headLabel={TABLE_HEAD}
+                rowCount={dataFiltered.length}
+                numSelected={table.selected.length}
+                onSort={table.onSort}
               />
 
-              <TableNoData notFound={notFound} />
-            </TableBody>
-          </Table>
-        </Scrollbar>
-      </Box>
+              <TableBody>
+                {dataFiltered
+                  .slice(
+                    table.page * table.rowsPerPage,
+                    table.page * table.rowsPerPage + table.rowsPerPage
+                  )
+                  .map((row) => (
+                    <EntreprisesTableRow
+                      key={row.id}
+                      row={row}
+                      selected={table.selected.includes(row.id)}
+                      onSelectRow={() => table.onSelectRow(row.id)}
+                    />
+                  ))}
+
+                <TableEmptyRows
+                  height={table.dense ? 56 : 56 + 20}
+                  emptyRows={emptyRows(table.page, table.rowsPerPage, dataFiltered.length)}
+                />
+
+                <TableNoData notFound={notFound} />
+              </TableBody>
+            </Table>
+          </Scrollbar>
+        </Box>
+      </Card>
     </ComptableContent>
   );
 }

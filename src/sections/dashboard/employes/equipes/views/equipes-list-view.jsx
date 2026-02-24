@@ -132,9 +132,6 @@ export default function EquipesListView() {
               >
                 Ajouter
               </Button>
-              <IconButton onClick={popover.onOpen}>
-                <Iconify icon="eva:more-vertical-fill" />
-              </IconButton>
             </Stack>
           }
           sx={{ mb: { xs: 3, md: 5 } }}
@@ -223,7 +220,7 @@ export default function EquipesListView() {
         slotProps={{ arrow: { placement: 'top-center' } }}
       >
         <MenuList>
-          <MenuItem onClick={()=>route.push(paths.dashboard.equipes.org)}>Voir l&apos;organigramme</MenuItem>
+          {/* Organigramme removed */}
         </MenuList>
       </CustomPopover>
     </>

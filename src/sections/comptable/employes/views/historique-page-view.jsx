@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Box, Table, Button, TableBody } from '@mui/material';
+import { Box, Table, Button, TableBody, Card } from '@mui/material';
 
 import { paths } from 'src/routes/paths';
 import { useRouter } from 'src/routes/hooks';
@@ -44,29 +44,34 @@ export default function HistoriquePageView() {
         links={[{ name: 'Tableau de bord', href: paths.comptable.root }, { name: 'Historique' }]}
         sx={{ mb: { xs: 3, md: 5 } }}
         action={
-          <Button variant='contained' color='primary' startIcon={<Iconify icon="material-symbols:download-rounded" />}>
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<Iconify icon="material-symbols:download-rounded" />}
+          >
             Exporter
           </Button>
         }
       />
-
-      <HistoriqueFiltersToolbar
-        filters={filters}
-        options={{
-          employes: [{ value: 1, label: 'Employé 1' }],
-          entreprise: [{ value: 1, label: 'Entreprise 1' }],
-          paie: [{ value: 1, label: 'Paie 1' }],
-        }}
-        onResetPage={table.onResetPage}
-        dateError={dateError}
-      />
-      <Box sx={{ position: 'relative' }}>
-        <Table size={table.dense ? 'small' : 'medium'} sx={{ minWidth: 800 }}>
-          <TableBody>
-            <TableNoData notFound={notFound} />
-          </TableBody>
-        </Table>
-      </Box>
+      <Card sx={{ mb: 3 }}>
+        <HistoriqueFiltersToolbar
+          filters={filters}
+          options={{
+            employes: [{ value: 1, label: 'Employé 1' }],
+            entreprise: [{ value: 1, label: 'Entreprise 1' }],
+            paie: [{ value: 1, label: 'Paie 1' }],
+          }}
+          onResetPage={table.onResetPage}
+          dateError={dateError}
+        />
+        <Box sx={{ position: 'relative' }}>
+          <Table size={table.dense ? 'small' : 'medium'} sx={{ minWidth: 800 }}>
+            <TableBody>
+              <TableNoData notFound={notFound} />
+            </TableBody>
+          </Table>
+        </Box>
+      </Card>
     </ComptableContent>
   );
 }

@@ -29,9 +29,6 @@ const Entretiens = lazy(() => import('src/pages/salaries/entretiens/index'));
 const Documents = lazy(() => import('src/pages/salaries/documents/index'));
 const ViewDocuments = lazy(() => import('src/pages/salaries/documents/view'));
 
-const Trombinoscope = lazy(() => import('src/pages/salaries/entreprise/index'));
-const Organigramme = lazy(() => import('src/pages/salaries/entreprise/organigramme'));
-
 const Account = lazy(() => import('src/pages/salaries/compte/index'));
 const BankAccount = lazy(() => import('src/pages/salaries/compte/bankAccount'))
 const BankAccountDetails = lazy(() => import('src/pages/salaries/compte/bankAccountDetails'))
@@ -95,13 +92,6 @@ export const salariesRoutes = [
         children: [
           { index: true, element: <Documents /> },
           { path: ":id/view", element: <ViewDocuments />}
-        ],
-      },
-      {
-        path: 'entreprise',
-        children: [
-          { index: true, element: <Trombinoscope /> },
-          { path: 'organigramme', element: <Organigramme /> },
         ],
       },
       {

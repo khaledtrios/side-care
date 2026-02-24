@@ -13,10 +13,10 @@ const IndexPage = lazy(() => import('src/pages/comptable/index'));
 
 const Aide = lazy(() => import('src/pages/comptable/aide/index'));
 const Cabinets = lazy(() => import('src/pages/comptable/cabinets/index'));
-const Commissions = lazy(() => import('src/pages/comptable/commission/index'));
+// Commissions removed
 const Compte = lazy(() => import('src/pages/comptable/compte/index'));
-const Cotisation = lazy(() => import('src/pages/comptable/cotisation/index'));
-const Devis = lazy(() => import('src/pages/comptable/devis/index'));
+// Cotisation removed
+// Devis removed
 
 const Employes = lazy(() => import('src/pages/comptable/employes/index'));
 // const EmployesMutuelles = lazy(() => import('src/pages/comptable/employes/mutuelles'));
@@ -27,11 +27,9 @@ const EmployesAdd = lazy(() => import('src/pages/comptable/employes/add'));
 
 
 const Entreprise = lazy(() => import('src/pages/comptable/entreprise/index')); // DONE
-const EntrepriseAdd = lazy(() => import('src/pages/comptable/entreprise/add')); // DONE
-const EntrepriseDsn = lazy(() => import('src/pages/comptable/entreprise/dsn'));  // DONE
 
 const GestContract = lazy(() => import('src/pages/comptable/gest-contract/index'));
-const OptContract = lazy(() => import('src/pages/comptable/opt-contract/index'));
+// OptContract removed
 const Paie = lazy(() => import('src/pages/comptable/paie/index'));
 
 const layoutContent = (
@@ -63,18 +61,8 @@ export const comptableRoutes = [
           { index: true, element: <Cabinets /> },
         ]
       },
-      {
-        path: 'cotisation',
-        children: [
-          { index: true, element: <Cotisation /> },
-        ]
-      },
-      {
-        path: 'devis',
-        children: [
-          { index: true, element: <Devis /> },
-        ]
-      },
+      // Cotisation removed
+      // Devis removed
       {
         path: 'employes',
         children: [
@@ -90,8 +78,7 @@ export const comptableRoutes = [
         path: 'entreprise',
         children: [
           { index: true, element: <Entreprise /> },
-          { path: 'add', element: <EntrepriseAdd /> },
-          { path: 'dsn', element: <EntrepriseDsn /> }
+
         ]
       },
       {
@@ -100,12 +87,7 @@ export const comptableRoutes = [
           { index: true, element: <GestContract /> },
         ]
       },
-      {
-        path: 'opt-contract',
-        children: [
-          { index: true, element: <OptContract /> },
-        ]
-      },
+      // OptContract removed
       {
         path: 'paie',
         children: [
@@ -118,12 +100,7 @@ export const comptableRoutes = [
           { index: true, element: <Compte /> },
         ]
       },
-      {
-        path: 'commissions',
-        children: [
-          { index: true, element: <Commissions /> },
-        ]
-      },
+      // Commissions removed
     ],
   },
 ];

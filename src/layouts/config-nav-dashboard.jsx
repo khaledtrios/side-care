@@ -58,8 +58,6 @@ export const navData = [
           { title: 'Entreprises', path: paths.dashboard.entreprise.root },
           { title: 'Effectifs', path: paths.dashboard.employes.root },
           { title: 'Équipe', path: paths.dashboard.equipes.root },
-          { title: 'Trombinoscope', path: paths.dashboard.equipes.tromb },
-          { title: 'Organigramme', path: paths.dashboard.equipes.org },
           { title: 'Bilan social', path: paths.dashboard.three },
         ],
       },
@@ -91,15 +89,7 @@ export const navData = [
           { title: 'Clôture', path: paths.dashboard.evp.cloture.root },
         ],
       },
-      {
-        title: 'Comptabilité',
-        path: paths.dashboard.comptabilite.root,
-        icon: ICONS.analytics,
-        children: [
-          { title: 'Fiches de paramétrage DSN', path: paths.dashboard.comptabilite.root },
-          { title: 'Tous vos documents', path: paths.dashboard.comptabilite.documents.root },
-        ],
-      },
+      // Comptabilité removed
     ],
   },
   /**
@@ -113,8 +103,6 @@ export const navData = [
         path: paths.dashboard.parametres.root,
         icon: ICONS.parameter,
         children: [
-          { title: 'Modules SIRH', path: paths.dashboard.parametres.root },
-          { title: 'Intégrations', path: paths.dashboard.parametres.integration.root },
           { title: 'Entreprises', path: paths.dashboard.parametres.entreprises.root },
           { title: 'Administrateurs', path: paths.dashboard.parametres.admins.root },
           { title: 'Cabinets experts-comptables', path: paths.dashboard.parametres.cabinets.root },

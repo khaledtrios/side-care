@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Tab, Tabs, Button } from '@mui/material';
+import { Tab, Tabs, Button, Box } from '@mui/material';
 
 import { paths } from 'src/routes/paths';
 
@@ -27,8 +27,22 @@ export default function CongesPageView() {
           { name: 'Tableau de bord', href: paths.salaries.root },
           { name: 'Mes congés & absences' },
         ]}
-        action={<Button onClick={open.onTrue} variant="contained">Déclarer un congé / absence</Button>}
+        action={
+          <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+            <Button onClick={open.onTrue} variant="contained">
+              Déclarer un congé / absence
+            </Button>
+          </Box>
+        }
+        sx={{ mb: { xs: 0, md: 5 } }}
       />
+
+      {/* Mobile-only button placed under breadcrumbs */}
+      <Box sx={{ display: { xs: 'flex', md: 'none' }, mt: 2, mb: { xs: 3, md: 0 } }}>
+        <Button onClick={open.onTrue} variant="contained" sx={{ width: '100%' }}>
+          Déclarer un congé / absence
+        </Button>
+      </Box>
 
       <Tabs value={tabs.value} onChange={tabs.onChange}>
         <Tab label="Demandes de congés" value={0} />

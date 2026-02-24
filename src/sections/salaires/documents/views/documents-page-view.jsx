@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import {
+  Box,
   List,
   Card,
   Button,
@@ -116,17 +117,32 @@ export default function DocumentsPageView() {
         description="Retrouvez sur cette page l'ensemble des documents vous concernant que vous avez déposés"
         links={[{ name: 'Tableau de bord', href: paths.salaries.root }, { name: 'Mes documents' }]}
         action={
-          <Button
-            onClick={addOpen.onTrue}
-            variant="contained"
-            color="primary"
-            startIcon={<Iconify icon="eva:plus-fill" />}
-          >
-            Ajouter un document
-          </Button>
+          <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+            <Button
+              onClick={addOpen.onTrue}
+              variant="contained"
+              color="primary"
+              startIcon={<Iconify icon="eva:plus-fill" />}
+            >
+              Ajouter un document
+            </Button>
+          </Box>
         }
-        sx={{ mb: { xs: 3, md: 5 } }}
+        sx={{ mb: { xs: 0, md: 5 } }}
       />
+
+      {/* Mobile-only add button under breadcrumbs */}
+      <Box sx={{ display: { xs: 'flex', md: 'none' }, mt: 2, mb: { xs: 3, md: 0 } }}>
+        <Button
+          onClick={addOpen.onTrue}
+          variant="contained"
+          color="primary"
+          startIcon={<Iconify icon="eva:plus-fill" />}
+          sx={{ width: '100%' }}
+        >
+          Ajouter un document
+        </Button>
+      </Box>
       <Card>
         {Object.keys(groupedDocuments).map((type) => {
           const typeLabel = documentTypes.find((t) => t.value === type)?.label || type;
@@ -138,35 +154,56 @@ export default function DocumentsPageView() {
               <AccordionDetails>
                 <List>
                   {groupedDocuments[type].map((doc, index) => (
-                    <ListItem
-                      key={index}
-                      secondaryAction={
-                        <>
-                          <Button
-                            variant="outlined"
-                            color="primary"
-                            LinkComponent={RouterLink}
-                            href={paths.salaries.documents.view(doc.id)}
-                            startIcon={<Iconify icon="eva:eye-outline" />}
-                            sx={{ mr: 1 }}
-                          >
-                            Voir
-                          </Button>
-                          <Button
-                            variant="outlined"
-                            color="secondary"
-                            startIcon={<Iconify icon="eva:edit-fill" />}
-                            onClick={() => handleEditClick(doc)}
-                          >
-                            Modifier
-                          </Button>
-                        </>
-                      }
-                    >
+                    <ListItem key={index}>
                       <ListItemText
                         primary={doc.name}
                         secondary={`File: ${doc.file} | Date: ${doc.date}`}
                       />
+
+                      {/* Desktop actions (inline) */}
+                      <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                        <Button
+                          variant="outlined"
+                          color="primary"
+                          component={RouterLink}
+                          href={paths.salaries.documents.view(doc.id)}
+                          startIcon={<Iconify icon="eva:eye-outline" />}
+                          sx={{ mr: 1 }}
+                        >
+                          Voir
+                        </Button>
+                        <Button
+                          variant="outlined"
+                          color="secondary"
+                          startIcon={<Iconify icon="eva:edit-fill" />}
+                          onClick={() => handleEditClick(doc)}
+                        >
+                          Modifier
+                        </Button>
+                      </Box>
+
+                      {/* Mobile actions (stacked under text) */}
+                      <Box sx={{ display: { xs: 'flex', md: 'none' }, flexDirection: 'column', gap: 1, mt: 1 }}>
+                        <Button
+                          variant="outlined"
+                          color="primary"
+                          component={RouterLink}
+                          href={paths.salaries.documents.view(doc.id)}
+                          startIcon={<Iconify icon="eva:eye-outline" />}
+                          sx={{ width: '100%' }}
+                        >
+                          Voir
+                        </Button>
+                        <Button
+                          variant="outlined"
+                          color="secondary"
+                          startIcon={<Iconify icon="eva:edit-fill" />}
+                          sx={{ width: '100%' }}
+                          onClick={() => handleEditClick(doc)}
+                        >
+                          Modifier
+                        </Button>
+                      </Box>
                     </ListItem>
                   ))}
                 </List>

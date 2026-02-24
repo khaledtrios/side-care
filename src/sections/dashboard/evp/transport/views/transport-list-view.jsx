@@ -143,7 +143,11 @@ export default function TransportListView() {
           { name: 'Liste' },
         ]}
         action={
-          <Stack flexDirection="row" spacing={1}>
+          <Stack
+            flexDirection="row"
+            spacing={1}
+            sx={{ display: { xs: 'none', md: 'flex' } }}
+          >
             <Button
               startIcon={<Iconify icon="mingcute:add-line" />}
               variant="contained"
@@ -194,6 +198,53 @@ export default function TransportListView() {
         }
         sx={{ mb: { xs: 3, md: 5 } }}
       />
+
+      {/* Mobile-only actions shown under breadcrumbs */}
+      <Box sx={{ mt: 2, mb: { xs: 3, md: 0 }, display: { xs: 'flex', md: 'none' }, flexDirection: 'column', gap: 1 }}>
+        <Button
+          startIcon={<Iconify icon="mingcute:add-line" />}
+          variant="contained"
+          color="primary"
+          href={paths.dashboard.evp.transport.addCurrent}
+          LinkComponent={RouterLink}
+          sx={{ width: '100%' }}
+        >
+          Ajouter titre de transport récurrent
+        </Button>
+
+        <Button
+          startIcon={<Iconify icon="mingcute:add-line" />}
+          variant="outlined"
+          color="primary"
+          href={paths.dashboard.evp.transport.addPonctuel}
+          LinkComponent={RouterLink}
+          sx={{ width: '100%' }}
+        >
+          Ajouter titre de transport ponctuel
+        </Button>
+
+        <Button
+          variant="contained"
+          startIcon={<Iconify icon="uil:export" />}
+          sx={{ width: '100%', textTransform: 'none' }}
+          onClick={() => {
+            // TODO: export to excel
+          }}
+        >
+          Exporter au format excel
+        </Button>
+
+        <Button
+          variant="outlined"
+          startIcon={<Iconify icon="ic:outline-settings" />}
+          sx={{ width: '100%', textTransform: 'none' }}
+          onClick={() => {
+            router.push(paths.dashboard.evp.transport.parametres);
+          }}
+        >
+          Paramétrage des titres de transport
+        </Button>
+      </Box>
 
       <Card>
         <TransportTableToolbar

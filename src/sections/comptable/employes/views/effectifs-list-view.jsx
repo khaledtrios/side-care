@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Box, Stack, Table, Button, Tooltip, TableBody, IconButton } from '@mui/material';
+import { Box, Stack, Table, Button, Tooltip, TableBody, IconButton, Card } from '@mui/material';
 
 import { paths } from 'src/routes/paths';
 import { useRouter } from 'src/routes/hooks';
@@ -128,62 +128,65 @@ export default function EffectifsListView() {
           </Stack>
         }
       />
-
-      <EffectifsToolbar
-        filters={filters}
-        onResetPage={table.onResetPage}
-        options={{
-          entrepriseList: [
-            { value: 'Entreprise 1', label: 'Entreprise 1' },
-            { value: 'Entreprise 2', label: 'Entreprise 2' },
-            { value: 'Entreprise 3', label: 'Entreprise 3' },
-          ],
-        }}
-      />
-
-      {canReset && <EffectifsFilterResults filters={filters} totalResults={dataFiltered.length} />}
-
-      <Box sx={{ position: 'relative' }}>
-        <TableSelectedAction
-          dense={table.dense}
-          numSelected={table.selected.length}
-          rowCount={dataFiltered.length}
+      <Card >
+        <EffectifsToolbar
+          filters={filters}
+          onResetPage={table.onResetPage}
+          options={{
+            entrepriseList: [
+              { value: 'Entreprise 1', label: 'Entreprise 1' },
+              { value: 'Entreprise 2', label: 'Entreprise 2' },
+              { value: 'Entreprise 3', label: 'Entreprise 3' },
+            ],
+          }}
         />
 
-        <Scrollbar sx={{ minHeight: 444 }}>
-          <Table size={table.dense ? 'small' : 'medium'} sx={{ minWidth: 800 }}>
-            <TableHeadCustom
-              order={table.order}
-              orderBy={table.orderBy}
-              headLabel={TABLE_HEAD}
-              rowCount={dataFiltered.length}
-              numSelected={table.selected.length}
-              onSort={table.onSort}
-            />
+        {canReset && (
+          <EffectifsFilterResults filters={filters} totalResults={dataFiltered.length} />
+        )}
 
-            <TableBody>
-              {dataFiltered
-                .slice(
-                  table.page * table.rowsPerPage,
-                  table.page * table.rowsPerPage + table.rowsPerPage
-                )
-                .map((row) => (
-                  <EffectifsTableRow
-                    row={row}
-                    onSelectRow={() => router.push(paths.comptable.employes.view(row.id))}
-                  />
-                ))}
+        <Box sx={{ position: 'relative' }}>
+          <TableSelectedAction
+            dense={table.dense}
+            numSelected={table.selected.length}
+            rowCount={dataFiltered.length}
+          />
 
-              <TableEmptyRows
-                height={table.dense ? 56 : 56 + 20}
-                emptyRows={emptyRows(table.page, table.rowsPerPage, dataFiltered.length)}
+          <Scrollbar sx={{ minHeight: 444 }}>
+            <Table size={table.dense ? 'small' : 'medium'} sx={{ minWidth: 800 }}>
+              <TableHeadCustom
+                order={table.order}
+                orderBy={table.orderBy}
+                headLabel={TABLE_HEAD}
+                rowCount={dataFiltered.length}
+                numSelected={table.selected.length}
+                onSort={table.onSort}
               />
 
-              <TableNoData notFound={notFound} />
-            </TableBody>
-          </Table>
-        </Scrollbar>
-      </Box>
+              <TableBody>
+                {dataFiltered
+                  .slice(
+                    table.page * table.rowsPerPage,
+                    table.page * table.rowsPerPage + table.rowsPerPage
+                  )
+                  .map((row) => (
+                    <EffectifsTableRow
+                      row={row}
+                      onSelectRow={() => router.push(paths.comptable.employes.view(row.id))}
+                    />
+                  ))}
+
+                <TableEmptyRows
+                  height={table.dense ? 56 : 56 + 20}
+                  emptyRows={emptyRows(table.page, table.rowsPerPage, dataFiltered.length)}
+                />
+
+                <TableNoData notFound={notFound} />
+              </TableBody>
+            </Table>
+          </Scrollbar>
+        </Box>
+      </Card>
     </ComptableContent>
   );
 }

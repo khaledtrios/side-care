@@ -44,43 +44,57 @@ export default function PrimesListView() {
           { name: 'Primes', href: paths.dashboard.evp.primes.root },
           { name: 'Liste' },
         ]}
-        sx={{ mb: { xs: 3, md: 5 } }}
+        sx={{ mb: { xs: 0, md: 5 } }}
         action={
-          <Box>
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, flexDirection: 'column', gap: 1, flexWrap: 'wrap' }}>
             <Button
               component={RouterLink}
               href={paths.dashboard.evp.primes.settings}
               variant="contained"
+              color="primary"
               startIcon={<Iconify icon="mingcute:add-line" />}
             >
               Paramétrer les primes
             </Button>
-            <IconButton color={popover.open ? 'inherit' : 'default'} onClick={popover.onOpen}>
-              <Iconify icon="eva:more-vertical-fill" />
-            </IconButton>
-            <CustomPopover
-              open={popover.open}
-              anchorEl={popover.anchorEl}
-              onClose={popover.onClose}
-              slotProps={{ arrow: { placement: 'right-top' } }}
+            <Button
+              variant="outlined"
+              startIcon={<Iconify icon="uil:export" />}
+              onClick={() => {
+                // Handle export action here
+              }}
             >
-              <MenuList>
-                <MenuItem
-                  onClick={() => {
-                    // edit.onTrue();
-                    popover.onClose();
-                  }}
-                >
-                  <Iconify icon="uil:export" />
-                  Exporter le tableau
-                </MenuItem>
-              </MenuList>
-            </CustomPopover>
+              Exporter le tableau
+            </Button>
           </Box>
         }
       />
+
+      {/* Mobile-only actions: show under breadcrumbs */}
+      <Box sx={{ mt: 2, mb: { xs: 3, md: 0 }, display: { xs: 'flex', md: 'none' }, flexDirection: 'column', gap: 1 }}>
+        <Button
+          component={RouterLink}
+          href={paths.dashboard.evp.primes.settings}
+          variant="contained"
+          color="primary"
+          startIcon={<Iconify icon="mingcute:add-line" />}
+          sx={{ width: '100%' }}
+        >
+          Paramétrer les primes
+        </Button>
+
+        <Button
+          variant="outlined"
+          startIcon={<Iconify icon="uil:export" />}
+          sx={{ width: '100%', textTransform: 'none' }}
+          onClick={() => {
+            // Handle export action here
+          }}
+        >
+          Exporter le tableau
+        </Button>
+      </Box>
       <Card>
-        <PrimesTableToolbar filters={filters}/>
+        <PrimesTableToolbar filters={filters} />
         <CardContent>{!primesList.length && <EmptyContent />}</CardContent>
       </Card>
     </DashboardContent>

@@ -59,8 +59,6 @@ export const paths = {
     },
     equipes: {
       root: `${ROOTS.DASHBOARD}/equipes`,
-      org: `${ROOTS.DASHBOARD}/equipes/organigramme`,
-      tromb: `${ROOTS.DASHBOARD}/equipes/trombinoscope`,
       view: (id) => `${ROOTS.DASHBOARD}/equipes/${id}/view`,
     },
     entreprise: {
@@ -128,9 +126,6 @@ export const paths = {
       entreprises: {
         root: `${ROOTS.DASHBOARD}/parametres/entreprises`,
       },
-      integration: {
-        root: `${ROOTS.DASHBOARD}/parametres/integration`,
-      },
     },
     account: {
       root: `${ROOTS.DASHBOARD}/account`,
@@ -176,10 +171,6 @@ export const paths = {
       root: `${ROOTS.SALARIES}/documents`,
       view: (id) => `${ROOTS.SALARIES}/documents/${id}/view`,
     },
-    entreprise: {
-      root: `${ROOTS.SALARIES}/entreprise`,
-      organigramme: `${ROOTS.SALARIES}/entreprise/organigramme`,
-    },
     compte: {
       root: `${ROOTS.SALARIES}/mon-compte`,
       addBankAccount: `${ROOTS.SALARIES}/mon-compte/add-compte-bancaire`,
@@ -204,12 +195,8 @@ export const paths = {
     cabinets: {
       root: `${ROOTS.COMPTABLE}/cabinets`,
     },
-    cotisation: {
-      root: `${ROOTS.COMPTABLE}/cotisation`,
-    },
-    devis: {
-      root: `${ROOTS.COMPTABLE}/devis`,
-    },
+    // cotisation: removed
+    // devis: removed
     employes: {
       root: `${ROOTS.COMPTABLE}/employes`,
       mutuelles: `${ROOTS.COMPTABLE}/employes/mutuelles`,
@@ -226,15 +213,11 @@ export const paths = {
     gestContract: {
       root: `${ROOTS.COMPTABLE}/gest-contract`,
     },
-    optContract: {
-      root: `${ROOTS.COMPTABLE}/opt-contract`,
-    },
+    // optContract: removed
     paie: {
       root: `${ROOTS.COMPTABLE}/paie`,
     },
-    commissions: {
-      root: `${ROOTS.COMPTABLE}/commissions`,
-    },
+    // commissions: removed
     comptes: {
       root: `${ROOTS.COMPTABLE}/comptes`,
     },

@@ -27,8 +27,7 @@ const Import = lazy(() => import('src/pages/dashboard/employes/import'));
 
 const Equipes = lazy(() => import('src/pages/dashboard/equipes/index'));
 const DetailsEquipes = lazy(() => import('src/pages/dashboard/equipes/details'));
-const Trombinoscope = lazy(() => import('src/pages/dashboard/trombinoscope/index'));
-const Organigramme = lazy(() => import('src/pages/dashboard/equipes/organigramme'));
+// Trombinoscope removed
 
 const DemarcheRh = lazy(() => import('src/pages/dashboard/gestionRh/index'));
 const Calendrier = lazy(() => import('src/pages/dashboard/gestionRh/calendrier'));
@@ -51,9 +50,8 @@ const AddTransportCurrent = lazy(() => import('src/pages/dashboard/paie/add-tran
 const AddTransportPonctuel = lazy(() => import('src/pages/dashboard/paie/add-transport-ponctuel'));
 const ParametresTransport = lazy(() => import('src/pages/dashboard/paie/parametres-transport'));
 
-const Comptabilite = lazy(() => import('src/pages/dashboard/comptabilite/index'));
-const ComptabiliteDocuments = lazy(() => import('src/pages/dashboard/comptabilite/documents'));
-
+// Comptabilite removed
+// Trombinoscope removed
 const Entreprises = lazy(() => import('src/pages/dashboard/entreprises/entreprises'));
 const AddEntreprise = lazy(() => import('src/pages/dashboard/entreprises/add'));
 const EditEntreprise = lazy(() => import('src/pages/dashboard/entreprises/edit'));
@@ -113,8 +111,6 @@ export const dashboardRoutes = [
         children: [
           { element: <Equipes />, index: true },
           { element: <DetailsEquipes />, path: ':id/view' },
-          { element: <Organigramme />, path: 'organigramme' },
-          { element: <Trombinoscope />, path: 'trombinoscope' },
         ],
       },
       {
@@ -140,8 +136,6 @@ export const dashboardRoutes = [
                 element: <Entretien />,
                 index: true,
               },
-              { element: <AddEntretien />, path: 'add' },
-              { element: <EditEntretien />, path: ':id/edit' },
               { element: <ViewEntretien />, path: ':id' },
               { element: <Personnaliser />, path: ':id/types' },
             ],
@@ -222,19 +216,7 @@ export const dashboardRoutes = [
           },
         ],
       },
-      {
-        path: "comptabilite",
-        children: [
-          {
-            index: true,
-            element: <Comptabilite />
-          },
-          {
-            path: "documents",
-            element: <ComptabiliteDocuments />
-          }
-        ]
-      },
+      // Comptabilite removed
       {
         path: "parametres",
         children: [

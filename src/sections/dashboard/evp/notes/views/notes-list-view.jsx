@@ -153,7 +153,11 @@ export default function NotesListView() {
             { name: 'Liste' },
           ]}
           action={
-            <Stack flexDirection="row" spacing={1}>
+            <Stack
+              flexDirection="row"
+              spacing={1}
+              sx={{ display: { xs: 'none', md: 'flex' } }}
+            >
               <Button
                 startIcon={<Iconify icon="mingcute:add-line" />}
                 variant="contained"
@@ -171,37 +175,74 @@ export default function NotesListView() {
               >
                 Relance Email
               </Button>
-              <IconButton onClick={popover.onOpen}>
-                <Iconify icon="eva:more-vertical-fill" />
-              </IconButton>
-              <CustomPopover
-                open={popover.open}
-                anchorEl={popover.anchorEl}
-                onClose={popover.onClose}
-                slotProps={{ arrow: { placement: 'top-right' } }}
+              <Button
+                variant="contained"
+                startIcon={<Iconify icon="mdi:file-excel" />}
+                onClick={() => {
+                  // Handle "Détail notes de frais (.xlsx)"
+                }}
               >
-                <MenuList>
-                  <MenuItem
-                    onClick={() => {
-                      popover.onClose();
-                    }}
-                  >
-                    Détail notes de frais (.xlsx)
-                  </MenuItem>
+                Détail notes de frais (.xlsx)
+              </Button>
 
-                  <MenuItem
-                    onClick={() => {
-                      popover.onClose();
-                    }}
-                  >
-                    Justificatifs (.zip)
-                  </MenuItem>
-                </MenuList>
-              </CustomPopover>
+              <Button
+                variant="outlined"
+                startIcon={<Iconify icon="mdi:folder-zip" />}
+                onClick={() => {
+                  // Handle "Justificatifs (.zip)"
+                }}
+              >
+                Justificatifs (.zip)
+              </Button>
             </Stack>
           }
           sx={{ mb: { xs: 3, md: 5 } }}
         />
+        {/* Mobile-only action buttons placed under the breadcrumbs */}
+        <Box sx={{ display: { xs: 'flex', md: 'none' }, flexDirection: 'column', gap: 1, mt: 2, mb: { xs: 3, md: 0 } }}>
+          <Button
+            startIcon={<Iconify icon="mingcute:add-line" />}
+            variant="contained"
+            color="primary"
+            href={paths.dashboard.evp.notes.add}
+            LinkComponent={RouterLink}
+            sx={{ width: '100%' }}
+          >
+            Ajouter
+          </Button>
+
+          <Button
+            onClick={() => mail.onTrue()}
+            startIcon={<Iconify icon="mynaui:send-solid" />}
+            variant="outlined"
+            color="primary"
+            sx={{ width: '100%' }}
+          >
+            Relance Email
+          </Button>
+
+          <Button
+            variant="contained"
+            startIcon={<Iconify icon="mdi:file-excel" />}
+            sx={{ width: '100%' }}
+            onClick={() => {
+              // Handle "Détail notes de frais (.xlsx)"
+            }}
+          >
+            Détail notes de frais (.xlsx)
+          </Button>
+
+          <Button
+            variant="outlined"
+            startIcon={<Iconify icon="mdi:folder-zip" />}
+            sx={{ width: '100%' }}
+            onClick={() => {
+              // Handle "Justificatifs (.zip)"
+            }}
+          >
+            Justificatifs (.zip)
+          </Button>
+        </Box>
         <Card>
           <NotesTableToolbar
             filters={filters}

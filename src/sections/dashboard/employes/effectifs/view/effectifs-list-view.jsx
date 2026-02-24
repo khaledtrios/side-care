@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 
-import { Tab, Menu, Tabs, Stack, Button, MenuItem, MenuList, IconButton } from '@mui/material';
+import { Tab, Menu, Tabs, Stack, Button, MenuItem, MenuList, IconButton, Box } from '@mui/material';
 
 import { paths } from 'src/routes/paths';
 import { useRouter } from 'src/routes/hooks';
@@ -87,44 +87,6 @@ export default function EffectifsListView() {
           Importer mes employés via fichiher excel
         </MenuItem>
       </Menu>
-      <IconButton onClick={popover.onOpen}>
-        <Iconify icon="eva:more-vertical-fill" />
-      </IconButton>
-      <CustomPopover
-        open={popover.open}
-        anchorEl={popover.anchorEl}
-        onClose={popover.onClose}
-        slotProps={{ arrow: { placement: 'right-top' } }}
-      >
-        <MenuList>
-          <MenuItem
-            onClick={() => {
-              popover.onClose();
-            }}
-          >
-            <Iconify icon="mdi:user-add" />
-            Déclarer un départ définitif
-          </MenuItem>
-
-          <MenuItem
-            onClick={() => {
-              popover.onClose();
-            }}
-          >
-            <Iconify icon="mdi:account-cancel" />
-            Déclarer un congé longue durée
-          </MenuItem>
-
-          <MenuItem
-            onClick={() => {
-              popover.onClose();
-            }}
-          >
-            <Iconify icon="solar:export-bold" />
-            Exporter le tableau
-          </MenuItem>
-        </MenuList>
-      </CustomPopover>
     </Stack>
   );
 
@@ -140,6 +102,48 @@ export default function EffectifsListView() {
         action={renderActions}
         sx={{ mb: { xs: 3, md: 5 } }}
       />
+      <Box
+  sx={{
+    display: 'flex',
+    flexDirection: { xs: 'column', sm: 'row' },
+    gap: 2,
+    width: '100%',
+  }}
+>
+  <Button
+    fullWidth
+    variant="contained"
+    startIcon={<Iconify icon="mdi:user-add" />}
+    onClick={() => {
+      // Handle départ définitif
+    }}
+  >
+    Déclarer un départ définitif
+  </Button>
+
+  <Button
+    fullWidth
+    variant="contained"
+    color="warning"
+    startIcon={<Iconify icon="mdi:account-cancel" />}
+    onClick={() => {
+      // Handle congé longue durée
+    }}
+  >
+    Déclarer un congé longue durée
+  </Button>
+
+  <Button
+    fullWidth
+    variant="outlined"
+    startIcon={<Iconify icon="solar:export-bold" />}
+    onClick={() => {
+      // Handle export
+    }}
+  >
+    Exporter le tableau
+  </Button>
+</Box>
       {renderTabs}
       {tabs.value === 'effectif' && <EffectifsList />}
       {tabs.value === 'statistiques' && <StatistiquesView />}
