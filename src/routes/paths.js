@@ -199,6 +199,9 @@ export const paths = {
       root: `${ROOTS.COMPTABLE}/conges`,
       add: `${ROOTS.COMPTABLE}/conges/new`,
     },
+    compte: {
+      root: `${ROOTS.COMPTABLE}/compte`,
+    },
     // cotisation: removed
     // devis: removed
     employes: {
@@ -220,12 +223,31 @@ export const paths = {
     // optContract: removed
     paie: {
       root: `${ROOTS.COMPTABLE}/paie`,
+      add: `${ROOTS.COMPTABLE}/paie/add`,
+      view: (id) => `${ROOTS.COMPTABLE}/paie/${id}`,
+    },
+    notes: {
+      root: `${ROOTS.COMPTABLE}/notes`,
+      add: `${ROOTS.COMPTABLE}/notes/add`,
+      view: (id) => `${ROOTS.COMPTABLE}/notes/${id}`,
+      edit: (id) => `${ROOTS.COMPTABLE}/notes/${id}/edit`,
     },
     primes: {
       root: `${ROOTS.COMPTABLE}/primes`,
       settings: `${ROOTS.COMPTABLE}/primes/settings`,
     },
-    // commissions: removed
+    transport: {
+      root: `${ROOTS.COMPTABLE}/transport`,
+      addRecurrent: `${ROOTS.COMPTABLE}/transport/new-recurrent`,
+      addPonctuel: `${ROOTS.COMPTABLE}/transport/new-ponctuel`,
+      parametres: `${ROOTS.COMPTABLE}/transport/parametres`,
+      edit: (id) => `${ROOTS.COMPTABLE}/transport/${id}/edit`,
+      view: (id) => `${ROOTS.COMPTABLE}/transport/${id}`,
+    },
+    cloture: {
+      root: `${ROOTS.COMPTABLE}/cloture`,
+      view: (id) => `${ROOTS.COMPTABLE}/cloture/${id}`,
+    },
     comptes: {
       root: `${ROOTS.COMPTABLE}/comptes`,
     },

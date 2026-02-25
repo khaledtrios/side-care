@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 
 import Box from '@mui/material/Box';
+import { Grid } from '@mui/material';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Table from '@mui/material/Table';
@@ -16,6 +17,7 @@ import { useSetState } from 'src/hooks/use-set-state';
 
 import { fCurrency } from 'src/utils/format-number';
 
+import { CONFIG } from 'src/config-global';
 import { ComptableContent } from 'src/layouts/comptable';
 import { fakePrimes, PRIME_STATUS, getPrimesSummary } from 'src/_mock/_primes';
 
@@ -36,6 +38,7 @@ import PrimesTableRow from '../primes-table-row';
 import PrimesAddDialog from '../primes-add-dialog';
 import PrimesTableToolbar from '../primes-table-toolbar';
 import { PrimesFilterResult } from '../primes-filter-result';
+import { AnalyticsWidgetSummary } from '../analytics-widget-summary';
 
 const TABLE_HEAD = [
   { id: 'employe', label: 'Employé' },
@@ -128,30 +131,30 @@ export default function PrimesListView() {
     );
   }, []);
 
-  const handleAddPrime = useCallback((newPrime) => {
-    const id = Math.max(...tableData.map((p) => p.id)) + 1;
-    setTableData((prev) => [
-      {
-        ...newPrime,
-        id,
-        status: 'pending',
-        createdAt: new Date().toISOString().split('T')[0],
-        validatedAt: null,
-        paidAt: null,
-      },
-      ...prev,
-    ]);
-    setOpenAddDialog(false);
-  }, [tableData]);
+  const handleAddPrime = useCallback(
+    (newPrime) => {
+      const id = Math.max(...tableData.map((p) => p.id)) + 1;
+      setTableData((prev) => [
+        {
+          ...newPrime,
+          id,
+          status: 'pending',
+          createdAt: new Date().toISOString().split('T')[0],
+          validatedAt: null,
+          paidAt: null,
+        },
+        ...prev,
+      ]);
+      setOpenAddDialog(false);
+    },
+    [tableData]
+  );
 
   return (
     <ComptableContent>
       <CustomBreadcrumbs
         heading="Gestion des Primes"
-        links={[
-          { name: 'Tableau de bord', href: paths.comptable.root },
-          { name: 'Primes' },
-        ]}
+        links={[{ name: 'Tableau de bord', href: paths.comptable.root }, { name: 'Primes' }]}
         sx={{ mb: { xs: 3, md: 5 } }}
         action={
           <Stack
@@ -180,49 +183,86 @@ export default function PrimesListView() {
           </Stack>
         }
       />
-
       {/* Stats Cards */}
-      <Box
-        sx={{
-          mb: 3,
-          display: 'grid',
-          gap: 3,
-          gridTemplateColumns: {
-            xs: 'repeat(1, 1fr)',
-            sm: 'repeat(2, 1fr)',
-            md: 'repeat(4, 1fr)',
-          },
-        }}
-      >
-        <StatCard
-          title="En attente"
-          value={summary.pendingCount}
-          subtitle={fCurrency(summary.pendingAmount)}
-          color="warning"
-          icon="material-symbols:hourglass-top"
-        />
-        <StatCard
-          title="Validées"
-          value={summary.approvedCount}
-          subtitle={fCurrency(summary.approvedAmount)}
-          color="info"
-          icon="material-symbols:check-circle"
-        />
-        <StatCard
-          title="Payées"
-          value={summary.paidCount}
-          subtitle={fCurrency(summary.paidAmount)}
-          color="success"
-          icon="material-symbols:payments"
-        />
-        <StatCard
-          title="Total"
-          value={fCurrency(summary.totalAmount)}
-          subtitle={`${tableData.length} primes`}
-          color="primary"
-          icon="material-symbols:account-balance-wallet"
-        />
-      </Box>
+        <Grid container spacing={3} sx={{ mb: 3 }}>
+        <Grid item xs={12} sm={6} md={3}>
+            <AnalyticsWidgetSummary
+            title="En attente"
+            total={summary.pendingCount}
+            percent={0} // Optional, you can calculate if needed
+               color="success"
+            icon={
+              <img
+                alt="hourglass icon"
+                src={`${CONFIG.assetsDir}/assets/icons/glass/ic-glass-bag.svg`}
+              />
+            }
+            chart={{
+              categories: [], // Optional: add chart data if needed
+              series: [],
+            }}
+          />
+        </Grid>
+
+        <Grid item xs={12} sm={6} md={3}>
+            <AnalyticsWidgetSummary
+            title="Validées"
+            total={summary.approvedCount}
+            percent={0}
+               color="secondary"
+            icon={
+              <img
+                alt="check icon"
+                src={`${CONFIG.assetsDir}/assets/icons/glass/ic-glass-users.svg`}
+              />
+            }
+            chart={{
+              categories: [],
+              series: [],
+            }}
+          />
+        </Grid>
+
+        <Grid item xs={12} sm={6} md={3}>
+            <AnalyticsWidgetSummary
+            title="Payées"
+            total={summary.paidCount}
+            percent={0}
+               color="info"
+            icon={
+              <img
+                alt="payments icon"
+                src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-banking.svg`}
+                width={80}
+                height={45}
+              />
+            }
+            chart={{
+              categories: [],
+              series: [],
+            }}
+          />
+        </Grid>
+
+        <Grid item xs={12} sm={6} md={3}>
+            <AnalyticsWidgetSummary
+            title="Total"
+            total={summary.totalAmount}
+            percent={0}
+               color="warning"
+            icon={
+              <img
+                alt="wallet icon"
+                src={`${CONFIG.assetsDir}/assets/icons/glass/ic-glass-buy.svg`}
+              />
+            }
+            chart={{
+              categories: [],
+              series: [],
+            }}
+          />
+        </Grid>
+      </Grid>
 
       {/* Table Card */}
       <Card>
@@ -230,11 +270,7 @@ export default function PrimesListView() {
           title="Liste des primes"
           sx={{ mb: 2 }}
           action={
-            <Button
-              variant="outlined"
-              size="small"
-              startIcon={<Iconify icon="uil:export" />}
-            >
+            <Button variant="outlined" size="small" startIcon={<Iconify icon="uil:export" />}>
               Exporter
             </Button>
           }
@@ -277,11 +313,7 @@ export default function PrimesListView() {
                     table.page * table.rowsPerPage + table.rowsPerPage
                   )
                   .map((row) => (
-                    <PrimesTableRow
-                      key={row.id}
-                      row={row}
-                      onUpdateStatus={handleUpdateStatus}
-                    />
+                    <PrimesTableRow key={row.id} row={row} onUpdateStatus={handleUpdateStatus} />
                   ))}
 
                 <TableEmptyRows

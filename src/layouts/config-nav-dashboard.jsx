@@ -99,7 +99,7 @@ export const navData = [
     subheader: 'Mon compte',
     items: [
       {
-        title: 'Paramètres & Intégrations',
+        title: 'Paramètres',
         path: paths.dashboard.parametres.root,
         icon: ICONS.parameter,
         children: [

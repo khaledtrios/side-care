@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 
 import { CONFIG } from 'src/config-global';
 
-import { BlankView } from 'src/sections/blank/view';
+import AccountPageView from 'src/sections/comptable/account/view/account-page-view';
 
 const metadata = { title: `Mon compte | Tableau de bord - ${CONFIG.appName}` };
 
@@ -13,7 +13,7 @@ export default function Page() {
         <title> {metadata.title}</title>
       </Helmet>
 
-      <BlankView />
+      <AccountPageView />
     </>
   );
 }

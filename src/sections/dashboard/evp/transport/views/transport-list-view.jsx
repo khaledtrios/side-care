@@ -128,7 +128,7 @@ export default function TransportListView() {
 
   const handleViewRow = useCallback(
     (id) => {
-      router.push(paths.dashboard.evp.notes.view(id));
+      router.push(paths.dashboard.evp.transport.view(id));
     },
     [router]
   );
@@ -139,7 +139,7 @@ export default function TransportListView() {
         heading="Titres de transport"
         links={[
           { name: 'Tableau de bord', href: paths.dashboard.root },
-          { name: 'Titres de transport', href: paths.dashboard.evp.notes.root },
+          { name: 'Titres de transport', href: paths.dashboard.evp.transport.root },
           { name: 'Liste' },
         ]}
         action={

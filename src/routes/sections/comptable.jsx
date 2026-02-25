@@ -33,7 +33,21 @@ const Entreprise = lazy(() => import('src/pages/comptable/entreprise/index')); /
 
 const GestContract = lazy(() => import('src/pages/comptable/gest-contract/index'));
 // OptContract removed
-const Paie = lazy(() => import('src/pages/comptable/paie/index'));
+// Paie pages were not created; reuse comptable notes pages instead
+const Paie = lazy(() => import('src/pages/comptable/notes/index'));
+const PaieAdd = lazy(() => import('src/pages/comptable/notes/add'));
+const PaieView = lazy(() => import('src/pages/comptable/notes/view'));
+const Notes = lazy(() => import('src/pages/comptable/notes/index'));
+const NotesAdd = lazy(() => import('src/pages/comptable/notes/add'));
+const NotesView = lazy(() => import('src/pages/comptable/notes/view'));
+const NotesEdit = lazy(() => import('src/pages/comptable/notes/edit'));
+
+const Transport = lazy(() => import('src/pages/comptable/transport/index'));
+const TransportAddRecurrent = lazy(() => import('src/pages/comptable/transport/add-recurrent'));
+const TransportAddPonctuel = lazy(() => import('src/pages/comptable/transport/add-ponctuel'));
+const TransportParametres = lazy(() => import('src/pages/comptable/transport/parametres'));
+
+const Cloture = lazy(() => import('src/pages/comptable/cloture/index'));
 
 const Primes = lazy(() => import('src/pages/comptable/primes/index'));
 const PrimesSettings = lazy(() => import('src/pages/comptable/primes/settings'));
@@ -105,6 +119,32 @@ export const comptableRoutes = [
         path: 'paie',
         children: [
           { index: true, element: <Paie /> },
+          { path: 'add', element: <PaieAdd /> },
+          { path: ':id', element: <PaieView /> },
+        ]
+      },
+      {
+        path: 'notes',
+        children: [
+          { index: true, element: <Notes /> },
+          { path: 'add', element: <NotesAdd /> },
+          { path: ':id/edit', element: <NotesEdit /> },
+          { path: ':id', element: <NotesView /> },
+        ]
+      },
+      {
+        path: 'transport',
+        children: [
+          { index: true, element: <Transport /> },
+          { path: 'new-recurrent', element: <TransportAddRecurrent /> },
+          { path: 'new-ponctuel', element: <TransportAddPonctuel /> },
+          { path: 'parametres', element: <TransportParametres /> },
+        ]
+      },
+      {
+        path: 'cloture',
+        children: [
+          { index: true, element: <Cloture /> },
         ]
       },
       {
