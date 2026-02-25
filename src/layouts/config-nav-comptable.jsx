@@ -67,8 +67,8 @@ export const navData = [
         path: paths.comptable.paie.root,
         icon: ICONS.chat,
         children: [
-          { title: 'Absences et congés', path: paths.comptable.paie.root },
-          { title: 'Primes', path: paths.comptable.paie.root },
+          { title: 'Absences et congés', path: paths.comptable.conges.root },
+          { title: 'Primes', path: paths.comptable.primes.root },
           { title: 'Notes de frais', path: paths.comptable.paie.root },
           { title: 'Titres de transport', path: paths.comptable.paie.root },
           { title: 'Clôture de paie', path: paths.comptable.paie.root },

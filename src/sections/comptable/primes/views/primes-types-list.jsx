@@ -1,27 +1,25 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-import {
-  Box,
-  Stack,
-  Button,
-  Select,
-  Dialog,
-  MenuItem,
-  TextField,
-  Typography,
-  IconButton,
-  InputLabel,
-  DialogTitle,
-  FormControl,
-  DialogContent,
-  DialogActions,
-} from '@mui/material';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
+import InputLabel from '@mui/material/InputLabel';
+import Typography from '@mui/material/Typography';
+import DialogTitle from '@mui/material/DialogTitle';
+import FormControl from '@mui/material/FormControl';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
 
 import { paths } from 'src/routes/paths';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 
-import { DashboardContent } from 'src/layouts/dashboard';
+import { ComptableContent } from 'src/layouts/comptable';
 
 import { Iconify } from 'src/components/iconify';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
@@ -34,8 +32,6 @@ const entreprises = [
 const initialTypes = [
   { id: 1, title: 'Prime de performance', entrepriseId: '1' },
   { id: 2, title: 'Prime exceptionnelle', entrepriseId: '2' },
-  { id: 3, title: 'Prime exceptionnelle', entrepriseId: '2' },
-  { id: 4, title: 'Prime annuelle', entrepriseId: '1' },
 ];
 
 export default function PrimesTypesList() {
@@ -85,12 +81,12 @@ export default function PrimesTypesList() {
   const filteredTypes = types.filter((t) => t.entrepriseId === selectedEntreprise);
 
   return (
-    <DashboardContent>
+    <ComptableContent>
       <CustomBreadcrumbs
         heading={`Paramétrage des primes de ${entreprises.find((e) => e.id === selectedEntreprise)?.label}`}
         links={[
-          { name: 'Tableau de bord', href: paths.dashboard.root },
-          { name: 'Primes', href: paths.dashboard.evp.primes.root },
+          { name: 'Tableau de bord', href: paths.comptable.root },
+          { name: 'Primes', href: paths.comptable.primes.root },
           { name: 'Paramétrer' },
         ]}
         sx={{ mb: { xs: 3, md: 5 } }}
@@ -167,6 +163,6 @@ export default function PrimesTypesList() {
           </Button>
         </DialogActions>
       </Dialog>
-    </DashboardContent>
+    </ComptableContent>
   );
 }

@@ -18,6 +18,9 @@ const Compte = lazy(() => import('src/pages/comptable/compte/index'));
 // Cotisation removed
 // Devis removed
 
+const Conges = lazy(() => import('src/pages/comptable/conges/index'));
+const CongesAdd = lazy(() => import('src/pages/comptable/conges/add'));
+
 const Employes = lazy(() => import('src/pages/comptable/employes/index'));
 // const EmployesMutuelles = lazy(() => import('src/pages/comptable/employes/mutuelles'));
 // const EmployesPrevoyance = lazy(() => import('src/pages/comptable/employes/prevoyance'));
@@ -31,6 +34,9 @@ const Entreprise = lazy(() => import('src/pages/comptable/entreprise/index')); /
 const GestContract = lazy(() => import('src/pages/comptable/gest-contract/index'));
 // OptContract removed
 const Paie = lazy(() => import('src/pages/comptable/paie/index'));
+
+const Primes = lazy(() => import('src/pages/comptable/primes/index'));
+const PrimesSettings = lazy(() => import('src/pages/comptable/primes/settings'));
 
 const layoutContent = (
   <ComptableLayout>
@@ -59,6 +65,13 @@ export const comptableRoutes = [
         path: 'cabinets',
         children: [
           { index: true, element: <Cabinets /> },
+        ]
+      },
+      {
+        path: 'conges',
+        children: [
+          { index: true, element: <Conges /> },
+          { path: 'new', element: <CongesAdd /> },
         ]
       },
       // Cotisation removed
@@ -92,6 +105,13 @@ export const comptableRoutes = [
         path: 'paie',
         children: [
           { index: true, element: <Paie /> },
+        ]
+      },
+      {
+        path: 'primes',
+        children: [
+          { index: true, element: <Primes /> },
+          { path: 'settings', element: <PrimesSettings /> },
         ]
       },
       {

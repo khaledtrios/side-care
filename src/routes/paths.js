@@ -195,6 +195,10 @@ export const paths = {
     cabinets: {
       root: `${ROOTS.COMPTABLE}/cabinets`,
     },
+    conges: {
+      root: `${ROOTS.COMPTABLE}/conges`,
+      add: `${ROOTS.COMPTABLE}/conges/new`,
+    },
     // cotisation: removed
     // devis: removed
     employes: {
@@ -216,6 +220,10 @@ export const paths = {
     // optContract: removed
     paie: {
       root: `${ROOTS.COMPTABLE}/paie`,
+    },
+    primes: {
+      root: `${ROOTS.COMPTABLE}/primes`,
+      settings: `${ROOTS.COMPTABLE}/primes/settings`,
     },
     // commissions: removed
     comptes: {
