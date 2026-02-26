@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Box, Table, Button, TableBody, Card } from '@mui/material';
+import { Box, Table, Button, TableBody, Card, TableHead, TableRow, TableCell } from '@mui/material';
 
 import { paths } from 'src/routes/paths';
 import { useRouter } from 'src/routes/hooks';
@@ -9,6 +9,7 @@ import { useSetState } from 'src/hooks/use-set-state';
 
 import { fIsAfter } from 'src/utils/format-time';
 
+import { historiqueData } from 'src/_mock/_historique';
 import { ComptableContent } from 'src/layouts/comptable';
 
 import { Iconify } from 'src/components/iconify';
@@ -21,7 +22,7 @@ export default function HistoriquePageView() {
   const table = useTable({ defaultOrderBy: 'date' });
   const router = useRouter();
 
-  const [tableData, setTableData] = useState([]);
+  const [tableData, setTableData] = useState(historiqueData);
 
   const filters = useSetState({
     employe: 'all',
@@ -66,8 +67,32 @@ export default function HistoriquePageView() {
         />
         <Box sx={{ position: 'relative' }}>
           <Table size={table.dense ? 'small' : 'medium'} sx={{ minWidth: 800 }}>
+            <TableHead>
+              <TableRow>
+                <TableCell>Date</TableCell>
+                <TableCell>Employé</TableCell>
+                <TableCell>Entreprise</TableCell>
+                <TableCell>Paie</TableCell>
+                <TableCell>Action</TableCell>
+                <TableCell>Détails</TableCell>
+              </TableRow>
+            </TableHead>
+
             <TableBody>
-              <TableNoData notFound={notFound} />
+              {tableData.length ? (
+                tableData.map((row) => (
+                  <TableRow key={row.id} hover>
+                    <TableCell>{new Date(row.date).toLocaleDateString('fr-FR')}</TableCell>
+                    <TableCell>{row.employeName}</TableCell>
+                    <TableCell>{row.entrepriseName}</TableCell>
+                    <TableCell>{row.paie}</TableCell>
+                    <TableCell>{row.action}</TableCell>
+                    <TableCell>{row.details}</TableCell>
+                  </TableRow>
+                ))
+              ) : (
+                <TableNoData notFound={notFound} />
+              )}
             </TableBody>
           </Table>
         </Box>

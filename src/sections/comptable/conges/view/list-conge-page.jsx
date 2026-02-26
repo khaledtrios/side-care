@@ -45,6 +45,7 @@ export default function ListCongePage() {
 
           <Button
             variant="contained"
+            color='primary'
             startIcon={<Iconify icon="uil:export" />}
             sx={{ width: { xs: '100%', md: 'auto' }, textTransform: 'none' }}
             onClick={() => {

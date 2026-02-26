@@ -29,7 +29,8 @@ const EmployesView = lazy(() => import('src/pages/comptable/employes/view'));
 const EmployesAdd = lazy(() => import('src/pages/comptable/employes/add'));
 
 
-const Entreprise = lazy(() => import('src/pages/comptable/entreprise/index')); // DONE
+const Entreprise = lazy(() => import('src/pages/comptable/entreprise/index'));
+const EntreprisesAdd = lazy(() => import('src/pages/comptable/entreprise/add'));
 
 const GestContract = lazy(() => import('src/pages/comptable/gest-contract/index'));
 // OptContract removed
@@ -46,6 +47,8 @@ const Transport = lazy(() => import('src/pages/comptable/transport/index'));
 const TransportAddRecurrent = lazy(() => import('src/pages/comptable/transport/add-recurrent'));
 const TransportAddPonctuel = lazy(() => import('src/pages/comptable/transport/add-ponctuel'));
 const TransportParametres = lazy(() => import('src/pages/comptable/transport/parametres'));
+const TransportEdit = lazy(() => import('src/pages/comptable/transport/edit'));
+const TransportView = lazy(() => import('src/pages/comptable/transport/view'));
 
 const Cloture = lazy(() => import('src/pages/comptable/cloture/index'));
 
@@ -105,6 +108,7 @@ export const comptableRoutes = [
         path: 'entreprise',
         children: [
           { index: true, element: <Entreprise /> },
+          { path: 'add', element: <EntreprisesAdd /> },
 
         ]
       },
@@ -139,6 +143,8 @@ export const comptableRoutes = [
           { path: 'new-recurrent', element: <TransportAddRecurrent /> },
           { path: 'new-ponctuel', element: <TransportAddPonctuel /> },
           { path: 'parametres', element: <TransportParametres /> },
+          { path: ':id', element: <TransportView /> },
+          { path: ':id/edit', element: <TransportEdit /> },
         ]
       },
       {

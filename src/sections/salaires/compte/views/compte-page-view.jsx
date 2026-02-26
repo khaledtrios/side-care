@@ -142,7 +142,7 @@ export default function ComptePageView({ user }) {
           { name: 'Employés', href: paths.dashboard.employes.root },
           { name: 'Effectifs' },
         ]}
-        action={<Button variant='contained'>Enregistrer</Button>}
+        action={<Button variant='contained' color="primary">Enregistrer</Button>}
         sx={{ mb: { xs: 3, md: 5 } }}
       />
       <Tabs value={tabs.value} onChange={tabs.onChange} sx={{ mb: { xs: 3, md: 5 } }}>

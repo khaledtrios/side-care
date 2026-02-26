@@ -1,25 +1,21 @@
 import React, { useState } from 'react';
 
 import {
-  Button,
-  IconButton,
-  ListItemText,
-  MenuList,
-  MenuItem,
   Stack,
-  TableCell,
+  Button,
   TableRow,
+  TableCell,
   TextField,
+  IconButton,
   Typography,
+  ListItemText,
 } from '@mui/material';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 
 import { Iconify } from 'src/components/iconify';
-import { usePopover, CustomPopover } from 'src/components/custom-popover';
 
 export default function CompteurTableRow({ row, onViewRow, onEditRow }) {
-  const popover = usePopover();
   const edit = useBoolean();
 
   const [values, setValues] = useState({
@@ -44,7 +40,6 @@ export default function CompteurTableRow({ row, onViewRow, onEditRow }) {
   };
 
   return (
-    <>
       <TableRow hover>
         <TableCell>
           <ListItemText
@@ -91,41 +86,17 @@ export default function CompteurTableRow({ row, onViewRow, onEditRow }) {
               </Button>
             </Stack>
           ) : (
-            <IconButton color={popover.open ? 'inherit' : 'default'} onClick={popover.onOpen}>
-              <Iconify icon="eva:more-vertical-fill" />
-            </IconButton>
+            <Stack direction="row" spacing={1}>
+              <IconButton size="small" onClick={() => onViewRow && onViewRow()}>
+                <Iconify icon="solar:eye-bold" />
+              </IconButton>
+              <IconButton size="small" onClick={() => edit.onTrue()}>
+                <Iconify icon="solar:pen-bold" />
+              </IconButton>
+            </Stack>
           )}
         </TableCell>
       </TableRow>
 
-      <CustomPopover
-        open={popover.open}
-        anchorEl={popover.anchorEl}
-        onClose={popover.onClose}
-        slotProps={{ arrow: { placement: 'right-top' } }}
-      >
-        <MenuList>
-          <MenuItem
-            onClick={() => {
-              onViewRow();
-              popover.onClose();
-            }}
-          >
-            <Iconify icon="solar:eye-bold" />
-            Voir
-          </MenuItem>
-
-          <MenuItem
-            onClick={() => {
-              edit.onTrue();
-              popover.onClose();
-            }}
-          >
-            <Iconify icon="solar:pen-bold" />
-            Modifier
-          </MenuItem>
-        </MenuList>
-      </CustomPopover>
-    </>
   );
 }

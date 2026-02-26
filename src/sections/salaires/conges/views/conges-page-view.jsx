@@ -29,7 +29,7 @@ export default function CongesPageView() {
         ]}
         action={
           <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-            <Button onClick={open.onTrue} variant="contained">
+            <Button onClick={open.onTrue} variant="contained" color="primary">
               Déclarer un congé / absence
             </Button>
           </Box>

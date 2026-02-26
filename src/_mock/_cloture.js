@@ -1,0 +1,40 @@
+import * as formatTime from 'src/utils/format-time';
+
+export const clotureMock = [
+  {
+    id: 1,
+    entreprise: 'Portorium Consulting',
+    period: formatTime.today(),
+    nbEmployes: 25,
+    absences: 8,
+    primes: 12,
+    notesFrais: 45,
+    transport: 20,
+    status: 'pending',
+    totalMontant: 15420.5,
+  },
+  {
+    id: 2,
+    entreprise: 'Sofrecom',
+    period: formatTime.today(),
+    nbEmployes: 42,
+    absences: 15,
+    primes: 8,
+    notesFrais: 32,
+    transport: 38,
+    status: 'validated',
+    totalMontant: 28750.0,
+  },
+  {
+    id: 3,
+    entreprise: 'Tech Solutions',
+    period: formatTime.today(),
+    nbEmployes: 18,
+    absences: 3,
+    primes: 5,
+    notesFrais: 22,
+    transport: 15,
+    status: 'draft',
+    totalMontant: 9840.25,
+  },
+];

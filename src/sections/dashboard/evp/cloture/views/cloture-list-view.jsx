@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { Card, Stack, Button, MenuList, MenuItem } from '@mui/material';
+import {
+  Card,
+  Table,
+  Stack,
+  Button,
+  TableRow,
+  MenuList,
+  MenuItem,
+  TableHead,
+  TableCell,
+  TableBody,
+} from '@mui/material';
 
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
@@ -9,6 +20,7 @@ import { useSetState } from 'src/hooks/use-set-state';
 
 import { fIsAfter } from 'src/utils/format-time';
 
+import { clotureMock } from 'src/_mock/_cloture';
 import { DashboardContent } from 'src/layouts/dashboard';
 
 import { useTable } from 'src/components/table';
@@ -31,6 +43,8 @@ export default function ClotureListView() {
 
   const dateError = fIsAfter(filters.state.startDate, filters.state.endDate);
 
+  const [tableData] = useState(clotureMock);
+
   return (
     <DashboardContent>
       <CustomBreadcrumbs
@@ -46,7 +60,6 @@ export default function ClotureListView() {
               startIcon={<Iconify icon="solar:copy-outline" />}
               variant="contained"
               color="primary"
-              href={paths.dashboard.evp.notes.add}
               LinkComponent={RouterLink}
             >
               Clôture
@@ -102,7 +115,34 @@ export default function ClotureListView() {
           dateError={dateError}
           options={{ entreprises: ['Société 1'] }}
         />
-        <EmptyContent />
+        <Table sx={{ minWidth: 800 }}>
+          <TableHead>
+            <TableRow>
+              <TableCell>Entreprise</TableCell>
+              <TableCell>Période</TableCell>
+              <TableCell>Nb employés</TableCell>
+              <TableCell>Absences</TableCell>
+              <TableCell>Primes</TableCell>
+              <TableCell>Notes de frais</TableCell>
+              <TableCell>Transport</TableCell>
+              <TableCell>Statut</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {tableData.map((row) => (
+              <TableRow key={row.id} hover>
+                <TableCell>{row.entreprise}</TableCell>
+                <TableCell>{row.period}</TableCell>
+                <TableCell>{row.nbEmployes}</TableCell>
+                <TableCell>{row.absences}</TableCell>
+                <TableCell>{row.primes}</TableCell>
+                <TableCell>{row.notesFrais}</TableCell>
+                <TableCell>{row.transport}</TableCell>
+                <TableCell>{row.status}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </Card>
     </DashboardContent>
   );
